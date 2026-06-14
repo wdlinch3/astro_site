@@ -3,104 +3,662 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TJHSST Astronomy Research Lab</title>
+  <title>TJHSST Laboratory for Astronomy &amp; Astrophysics Research</title>
   <style>
     :root {
       color-scheme: dark;
+      --bg: #06101d;
+      --bg-deep: #030712;
+      --panel: rgba(9, 22, 39, 0.78);
+      --panel-strong: rgba(13, 31, 55, 0.92);
+      --border: rgba(183, 216, 255, 0.18);
+      --text: #f4f8ff;
+      --muted: #c4d2e3;
+      --soft: #90a4bc;
+      --accent: #67c4ff;
+      --accent-strong: #9bd8ff;
+      --gold: #f4cf73;
       font-family: Arial, Helvetica, sans-serif;
-      background: #08111f;
-      color: #f4f7fb;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
       margin: 0;
       min-height: 100vh;
       background:
-        radial-gradient(circle at 20% 20%, rgba(77, 171, 247, 0.22), transparent 28rem),
-        radial-gradient(circle at 80% 10%, rgba(255, 212, 59, 0.12), transparent 18rem),
-        linear-gradient(135deg, #08111f 0%, #12233a 55%, #0c1526 100%);
+        radial-gradient(circle at 15% 8%, rgba(103, 196, 255, 0.24), transparent 30rem),
+        radial-gradient(circle at 82% 4%, rgba(244, 207, 115, 0.13), transparent 22rem),
+        radial-gradient(circle at 72% 58%, rgba(84, 109, 229, 0.16), transparent 34rem),
+        linear-gradient(135deg, var(--bg-deep) 0%, #081427 48%, #0c1930 100%);
+      color: var(--text);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(255, 255, 255, 0.42) 0 1px, transparent 1px),
+        radial-gradient(circle, rgba(155, 216, 255, 0.3) 0 1px, transparent 1px);
+      background-position: 0 0, 42px 65px;
+      background-size: 120px 120px, 170px 170px;
+      opacity: 0.18;
+    }
+
+    a {
+      color: var(--accent-strong);
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      z-index: 10;
+      transform: translateY(-160%);
+      border-radius: 6px;
+      padding: 0.7rem 0.9rem;
+      background: var(--text);
+      color: var(--bg-deep);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      border-bottom: 1px solid rgba(183, 216, 255, 0.13);
+      background: rgba(3, 7, 18, 0.78);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 1rem 0;
+    }
+
+    .site-mark {
+      color: var(--text);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+    }
+
+    nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.35rem 1rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    nav a {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 0.45rem 0.7rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      background: rgba(103, 196, 255, 0.1);
+      color: var(--text);
     }
 
     main {
-      max-width: 900px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero,
+    .section,
+    .site-footer {
+      width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 72px 24px;
+    }
+
+    .hero {
+      display: grid;
+      align-items: center;
+      min-height: 76vh;
+      padding: 5.5rem 0 4rem;
+    }
+
+    .hero-content {
+      max-width: 860px;
     }
 
     .eyebrow {
-      color: #8bd3ff;
+      margin: 0 0 1rem;
+      color: var(--accent);
       font-size: 0.9rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
     h1 {
-      margin: 16px 0;
-      max-width: 760px;
-      font-size: clamp(2.5rem, 7vw, 5.25rem);
-      line-height: 1;
+      max-width: 920px;
+      margin-bottom: 1.25rem;
+      font-size: clamp(2.55rem, 8vw, 5.8rem);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 0.85rem;
+      font-size: clamp(1.75rem, 4vw, 2.55rem);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 0.75rem;
+      color: var(--text);
+      font-size: 1.12rem;
+      line-height: 1.25;
     }
 
     p {
-      max-width: 700px;
-      color: #d8e2f0;
-      font-size: 1.15rem;
-      line-height: 1.7;
-    }
-
-    .details {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-      margin-top: 42px;
-    }
-
-    .detail {
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: 8px;
-      padding: 22px;
-      background: rgba(8, 17, 31, 0.68);
-    }
-
-    .detail h2 {
-      margin: 0 0 10px;
+      color: var(--muted);
       font-size: 1.05rem;
+      line-height: 1.68;
     }
 
-    .detail p {
+    .hero p {
+      max-width: 780px;
+      color: #dce8f7;
+      font-size: clamp(1.08rem, 2vw, 1.25rem);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 2rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.8rem;
+      border: 1px solid rgba(155, 216, 255, 0.45);
+      border-radius: 999px;
+      padding: 0.76rem 1rem;
+      background: rgba(103, 196, 255, 0.13);
+      color: var(--text);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .button.primary {
+      border-color: transparent;
+      background: var(--accent);
+      color: #02101d;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      background: rgba(155, 216, 255, 0.22);
+    }
+
+    .button.primary:hover {
+      background: var(--accent-strong);
+    }
+
+    .section {
+      padding: 4.5rem 0;
+      border-top: 1px solid rgba(183, 216, 255, 0.1);
+    }
+
+    .section-intro {
+      max-width: 780px;
+      margin-bottom: 2rem;
+    }
+
+    .section-intro p:last-child,
+    .card p:last-child,
+    .callout p:last-child {
+      margin-bottom: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .grid.four {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .card,
+    .callout {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: linear-gradient(180deg, var(--panel-strong), var(--panel));
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+    }
+
+    .card {
+      padding: 1.35rem;
+    }
+
+    .card p,
+    .card li {
+      color: #bccbe0;
+      font-size: 0.97rem;
+      line-height: 1.58;
+    }
+
+    .card ul,
+    .mission-list {
       margin: 0;
-      color: #b9c8d9;
-      font-size: 0.98rem;
-      line-height: 1.55;
+      padding-left: 1.2rem;
+    }
+
+    .card li + li,
+    .mission-list li + li {
+      margin-top: 0.45rem;
+    }
+
+    .mission-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    .mission-list {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.35rem 1.35rem 1.35rem 2.35rem;
+      background: rgba(4, 13, 26, 0.62);
+      color: #d3dfef;
+      line-height: 1.58;
+    }
+
+    .callout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.55fr) minmax(0, 1fr);
+      gap: 1.5rem;
+      padding: 1.6rem;
+      background:
+        radial-gradient(circle at 12% 20%, rgba(103, 196, 255, 0.2), transparent 16rem),
+        linear-gradient(135deg, rgba(13, 31, 55, 0.95), rgba(5, 14, 28, 0.92));
+    }
+
+    .callout-label {
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .link-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .text-link {
+      color: var(--accent-strong);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .text-link:hover {
+      text-decoration: underline;
+    }
+
+    .site-footer {
+      padding: 3rem 0 4rem;
+      color: var(--soft);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .site-footer p {
+      max-width: 820px;
+      color: var(--soft);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 860px) {
+      .nav-wrap {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      nav ul {
+        justify-content: flex-start;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 4rem;
+      }
+
+      .grid,
+      .grid.four,
+      .mission-panel,
+      .callout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero,
+      .section,
+      .site-footer,
+      .nav-wrap {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .site-header {
+        position: static;
+      }
+
+      nav a {
+        padding-left: 0;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .section {
+        padding: 3.25rem 0;
+      }
+
+      .card,
+      .callout,
+      .mission-list {
+        padding: 1.1rem;
+      }
+
+      .mission-list {
+        padding-left: 2rem;
+      }
     }
   </style>
 </head>
 <body>
-  <main>
-    <div class="eyebrow">Thomas Jefferson High School for Science and Technology</div>
-    <h1>Astronomy Research Lab</h1>
-    <p>
-      The TJHSST Astronomy Research Lab gives students hands-on experience with
-      observational astronomy, astrophysics, and data-driven research. Students
-      explore the universe through telescope imaging, computational analysis,
-      and independent projects on stars, galaxies, exoplanets, and cosmic events.
-    </p>
+  <a class="skip-link" href="#main">Skip to main content</a>
 
-    <section class="details" aria-label="Lab highlights">
-      <article class="detail">
-        <h2>Research Focus</h2>
-        <p>Student teams investigate variable stars, orbital motion, spectroscopy, and deep-sky imaging.</p>
-      </article>
-      <article class="detail">
-        <h2>Tools</h2>
-        <p>The lab combines telescopes, image processing software, Python analysis, and astronomical databases.</p>
-      </article>
-      <article class="detail">
-        <h2>Mission</h2>
-        <p>Students learn to ask precise scientific questions, collect evidence, and communicate discoveries clearly.</p>
-      </article>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="site-mark" href="#">TJHSST Astronomy &amp; Astrophysics</a>
+      <nav aria-label="Primary navigation">
+        <ul>
+          <li><a href="#mission">Mission</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#student-work">Student Work</a></li>
+          <li><a href="#related-opportunities">Related Opportunities</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-content">
+        <p class="eyebrow">Thomas Jefferson High School for Science and Technology</p>
+        <h1 id="page-title">Laboratory for Astronomy &amp; Astrophysics Research</h1>
+        <p>
+          TJHSST's senior research laboratory for authentic work in astronomy,
+          astrophysics, astronomical data analysis, instrumentation, and
+          computational modeling.
+        </p>
+        <div class="actions" aria-label="Primary links">
+          <a class="button primary" href="#mission">Explore the lab</a>
+          <a class="button" href="https://wdlinch3.github.io/aa/">Advanced Astronomy at TJ</a>
+          <a class="button" href="https://activities.tjhsst.edu/astronomyclub/">Astronomy Club</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="mission" aria-labelledby="mission-title">
+      <div class="mission-panel">
+        <div class="section-intro">
+          <h2 id="mission-title">From Learning Astronomy to Doing Astronomy</h2>
+          <p>
+            The lab helps students move beyond isolated exercises into
+            year-long research projects built around precise scientific
+            questions, quantitative evidence, and sustained collaboration.
+          </p>
+          <p>
+            Students read technical literature, frame research plans, choose
+            appropriate methods, analyze data carefully, and communicate their
+            conclusions in scientific forms.
+          </p>
+        </div>
+        <ul class="mission-list">
+          <li>Precise scientific questions</li>
+          <li>Technical literature and research plans</li>
+          <li>Evidence, analysis, and uncertainty</li>
+          <li>Scientific communication and collaboration</li>
+          <li>Quantitative work sustained across the year</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="research" aria-labelledby="research-title">
+      <div class="section-intro">
+        <h2 id="research-title">Research Modes</h2>
+        <p>
+          Student projects may begin with sky observations, public astronomical
+          archives, numerical models, or the technical systems that make
+          measurement possible.
+        </p>
+      </div>
+      <div class="grid four">
+        <article class="card">
+          <h3>Observational Astronomy</h3>
+          <p>
+            Planning observations, measuring astronomical sources, and turning
+            sky images into calibrated evidence.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Archival Data</h3>
+          <p>
+            Using public survey catalogs, image archives, and mission data to
+            ask questions that exceed a single observing run.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Computational Astrophysics</h3>
+          <p>
+            Building models and simulations that connect physical assumptions
+            with observable astronomical behavior.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Instrumentation and Methods</h3>
+          <p>
+            Developing careful procedures for measurement, calibration,
+            automation, and data quality.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="how-students-work" aria-labelledby="work-title">
+      <div class="section-intro">
+        <h2 id="work-title">How Students Work</h2>
+        <p>
+          Lab work is organized around the habits of research: preparation,
+          iteration, critique, documentation, and clear explanation.
+        </p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3>Research Development</h3>
+          <ul>
+            <li>Literature review and journal-club discussion</li>
+            <li>Research proposals and project design</li>
+            <li>Selection of data, tools, and methods</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Analysis and Iteration</h3>
+          <ul>
+            <li>Python and Jupyter-based analysis</li>
+            <li>Modeling, visualization, and uncertainty estimates</li>
+            <li>Regular group meetings and progress reports</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Scientific Communication</h3>
+          <ul>
+            <li>Written reports and research-style papers</li>
+            <li>Conference-style posters</li>
+            <li>Oral presentations and public explanation</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="tools-methods" aria-labelledby="tools-title">
+      <div class="section-intro">
+        <h2 id="tools-title">Tools and Methods</h2>
+        <p>
+          Students combine computational skill, astronomical data literacy, and
+          physical reasoning to make their projects defensible.
+        </p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3>Computation</h3>
+          <p>
+            Python, Jupyter notebooks, numerical modeling, reproducible
+            workflows, visualization, and clear documentation.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Astronomical Data</h3>
+          <p>
+            Images, catalogs, spectra, time series, public archives, and the
+            calibration choices that shape interpretation.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Physical Reasoning</h3>
+          <p>
+            Mechanics, radiation, gravity, statistics, and order-of-magnitude
+            estimates used to connect models with observations.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="student-work" aria-labelledby="student-work-title">
+      <div class="callout">
+        <div>
+          <p class="callout-label">Coming soon</p>
+          <h2 id="student-work-title">Student Projects</h2>
+        </div>
+        <p>
+          Future updates will collect project summaries, posters, paper
+          abstracts, observing results, simulations, and other public-facing
+          products from the lab's student research program.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="related-opportunities" aria-labelledby="opportunities-title">
+      <div class="section-intro">
+        <h2 id="opportunities-title">Related Opportunities</h2>
+        <p>
+          The research lab sits alongside other astronomy pathways for TJHSST
+          students, from coursework to clubs and team activities.
+        </p>
+      </div>
+      <div class="grid">
+        <article class="card link-card">
+          <div>
+            <h3>Advanced Astronomy</h3>
+            <p>
+              Course materials and support for the Advanced Astronomy sequence
+              at TJ.
+            </p>
+          </div>
+          <a class="text-link" href="https://wdlinch3.github.io/aa/">Advanced Astronomy at TJ</a>
+        </article>
+        <article class="card link-card">
+          <div>
+            <h3>Astronomy Club</h3>
+            <p>
+              Student astronomy community, events, and public-facing club
+              activities.
+            </p>
+          </div>
+          <a class="text-link" href="https://activities.tjhsst.edu/astronomyclub/">Astronomy Club</a>
+        </article>
+        <article class="card">
+          <h3>Astronomy Competition Team</h3>
+          <p>
+            A related student opportunity for students interested in
+            competition-style astronomy and astrophysics problem solving.
+          </p>
+        </article>
+      </div>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <p>
+      Laboratory for Astronomy &amp; Astrophysics Research · Thomas Jefferson High
+      School for Science and Technology.
+    </p>
+    <p>
+      This page is an evolving public overview of the lab and its student
+      research program.
+    </p>
+  </footer>
 </body>
 </html>
