@@ -289,7 +289,7 @@ def contact_page(data: dict) -> tuple[str, str, str, str]:
   </header>
   <section class="contact-card" aria-labelledby="director-title">
     <p class="rail-label">Lab director</p>
-    <h2 id="director-title">William Lynch</h2>
+    <h2 id="director-title">{esc(site['director_name'])}</h2>
     <p>Thomas Jefferson High School for Science and Technology</p>
     <a class="button primary" href="mailto:{email}">Email the lab director</a>
   </section>
