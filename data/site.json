@@ -120,7 +120,7 @@
       "question": "In a particle-based early-galaxy model, how does the mass of a central primordial black hole affect the formation of Population III stars?",
       "significance": "Early black holes and primordial stars may influence one another's formation, shaping models of the first galaxies and black-hole growth.",
       "method": "The team built a C++ smoothed-particle-hydrodynamics simulation with Barnes-Hut gravity, quadtree neighbor searches, leapfrog integration, an isothermal gas model, and a Jeans-density star-formation threshold, then compared runs with different central black-hole masses.",
-      "result": "In this exploratory model, higher central black-hole masses were associated with fewer stars at the end of a run. The fitted final star count declined approximately exponentially with black-hole mass; the model did not include black-hole growth or radiative feedback.",
+      "result": "In this exploratory model, higher initialized central black-hole masses were associated with fewer stars at the end of a run. The fitted final star count declined approximately exponentially with black-hole mass; the model omitted direct radiative feedback.",
       "artifacts": [
         {"label": "Paper", "path": "2025-26/Final_paper/pbh_seed_sim.pdf"},
         {"label": "Poster", "path": "2025-26/Final_poster/pbh_seed_sim.pdf"}

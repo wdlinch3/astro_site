@@ -20,22 +20,52 @@ Through implementation commit `1c160a5`, the site contains:
 - the privacy rule that exposes HTML student credits only for explicitly marked
   external collaborations.
 
-The documentation in `AGENTS.md` and this handoff is proposed separately in
-open PR #3. Nothing was pulled to Director or anonymously verified on the live
-TJHSST site as part of this work.
+The documentation in `AGENTS.md` and this handoff was merged through PR #3:
 
-## Before the first deployment
+<https://github.com/wdlinch3/astro_site/pull/3>
 
-1. Author-review the eight public scientific summaries and the V-SPARC credit
-   disclosure.
+On 2026-08-30, an anonymous verification found the generated site live at
+<https://activities.tjhsst.edu/astro/>. All 15 generated HTML pages, both shared
+CSS/JavaScript assets, and all 12 retained papers/posters were retrievable and
+byte-identical to `origin/main` at merge commit `5b090cd`. The required 1280,
+768, 390, and 320 CSS-pixel reviews confirmed the actual `window.innerWidth`,
+fully discoverable primary navigation, and no page-level horizontal overflow.
+Each filtered tjSTAR link returned exactly one matching presentation. The other
+external links resolved to their intended current targets; NRL's homepage was
+browser-verified after its automated HTTP check returned a bot-protection 403.
+
+This evidence confirms the public result, but not the delivery mechanism. It
+does not establish whether Director's `public` directory was updated with
+`git pull --ff-only` or by another action.
+
+## Current review and deployment gates
+
+1. An independent source audit of the eight public scientific summaries and the
+   V-SPARC credit disclosure was completed on 2026-08-30 against the retained
+   papers/posters. The summaries remained appropriately concise and cautious;
+   one primordial-feedback sentence was clarified to describe the initialized
+   central black-hole mass and the explicitly omitted direct radiative feedback.
+   Author approval is still required.
 2. Confirm with Tiger that Director's `public` directory should remain a Git
    checkout and that direct server-side edits are outside the normal workflow.
-3. When deployment is authorized, confirm the intended revision on `main`, then
-   use `git pull --ff-only` in the Director checkout.
-4. Verify the live site anonymously, including the homepage, all primary pages,
-   all eight project records, papers/posters, family links, and mobile behavior.
+3. Before the next deployment, confirm the intended revision on `main`, then use
+   `git pull --ff-only` in the Director checkout after authorization.
+4. After every deployment, repeat anonymous verification of the homepage,
+   primary pages, project records, artifacts, family links, and mobile behavior.
 
 ## Content and links still needed
+
+### Retained artifact review
+
+- The V-SPARC HTML credit uses the four students named on the retained poster
+  and the live tjSTAR record. The retained paper's title page names only Aarushi
+  Kanigicherla and Sarah Trainer. Keep the four-name disclosure pending explicit
+  author confirmation; do not infer that the shorter paper byline supersedes the
+  poster and tjSTAR record.
+- The retained SPINNI poster contains visibly unfinished authoring text in its
+  Discussion & Conclusions section. The public HTML record already limits its
+  result to what the artifact supports. Do not edit or replace the poster without
+  an approved final artifact and explicit direction.
 
 ### 2026-27 work
 
