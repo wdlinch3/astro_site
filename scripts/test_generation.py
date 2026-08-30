@@ -56,6 +56,21 @@ def main() -> int:
     assert "A year built around evidence" not in rendered["index.html"]
     assert 'aria-current="page">Partners</a>' in rendered["partners/index.html"]
     assert 'aria-current="page">TJ Labs</a>' in rendered["labs/index.html"]
+    assert "<h1>Research archive</h1>" in rendered["research/index.html"]
+    assert "<h1>Senior research in Astro Lab</h1>" in rendered["about/index.html"]
+    assert "<h1>Partners</h1>" in rendered["partners/index.html"]
+    assert "<h1>Contact</h1>" in rendered["contact/index.html"]
+
+    retired_copy = (
+        "Browse the lab's work",
+        "From learning astronomy to doing astronomy",
+        "Partners and collaborators",
+        "Connect with the lab",
+        "Questions across the astronomical sciences",
+        "Interested in collaborating?",
+    )
+    for page_html in rendered.values():
+        assert not any(phrase in page_html for phrase in retired_copy)
 
     for project in data["projects"]:
         year_html = rendered[f"{project['year']}/index.html"]

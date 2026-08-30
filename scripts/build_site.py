@@ -207,8 +207,8 @@ def home_page(data: dict) -> tuple[str, str, str, str]:
   <section class="home-section" aria-labelledby="featured-title">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">Research at a glance</p>
-        <h2 id="featured-title">Questions across the astronomical sciences</h2>
+        <p class="eyebrow">Recent research</p>
+        <h2 id="featured-title">Selected {esc(year['label'])} projects</h2>
       </div>
       <a class="text-link" href="{esc(archive_link)}">View all {len(projects)} projects</a>
     </div>
@@ -235,9 +235,8 @@ def research_page(data: dict) -> tuple[str, str, str, str]:
     content = f"""
 <div class="page-shell">
   <header class="page-heading">
-    <p class="eyebrow">Research</p>
-    <h1>Browse the lab's work</h1>
-    <p class="lede">Annual records collect concise accounts of the scientific question, method, and result, with retained papers and posters available as supporting artifacts.</p>
+    <h1>Research archive</h1>
+    <p class="lede">Browse project records by year. Each record summarizes the question, method, and result and links to retained papers and posters.</p>
   </header>
   <div class="research-index-grid">
     <section class="year-feature" aria-labelledby="year-title">
@@ -263,11 +262,11 @@ def about_page(data: dict) -> tuple[str, str, str, str]:
 <div class="page-shell article-shell">
   <header class="page-heading">
     <p class="eyebrow">About the lab</p>
-    <h1>From learning astronomy to doing astronomy</h1>
-    <p class="lede">The lab supports year-long senior research centered on precise questions, quantitative evidence, sustained iteration, and responsible scientific communication.</p>
+    <h1>Senior research in Astro Lab</h1>
+    <p class="lede">Students complete a year-long astronomy or astrophysics research project and present the resulting work.</p>
   </header>
   <section class="content-section" aria-labelledby="practice-title">
-    <h2 id="practice-title">Research practice</h2>
+    <h2 id="practice-title">Research process</h2>
     <div class="practice-grid">
       <article><h3>Develop</h3><p>Read technical literature, identify a tractable question, and design a research plan with appropriate evidence.</p></article>
       <article><h3>Investigate</h3><p>Use observations, archives, computation, simulation, or instrumentation while recording choices and uncertainty.</p></article>
@@ -283,7 +282,7 @@ def about_page(data: dict) -> tuple[str, str, str, str]:
   <section class="content-section split-section" aria-labelledby="modes-title">
     <div>
       <p class="eyebrow">Research modes</p>
-      <h2 id="modes-title">Several paths to an astronomical question</h2>
+      <h2 id="modes-title">Methods used in the lab</h2>
     </div>
     <ul class="plain-list">
       <li>Observational astronomy and calibrated measurement</li>
@@ -295,7 +294,7 @@ def about_page(data: dict) -> tuple[str, str, str, str]:
   <section class="content-section callout-section" aria-labelledby="records-title">
     <div>
       <p class="eyebrow">Public record</p>
-      <h2 id="records-title">See what the work produced</h2>
+      <h2 id="records-title">Project records</h2>
     </div>
     <a class="button primary" href="{esc(href(output, 'research/index.html'))}">Browse research</a>
   </section>
@@ -316,21 +315,20 @@ def contact_page(data: dict) -> tuple[str, str, str, str]:
     content = f"""
 <div class="page-shell article-shell">
   <header class="page-heading">
-    <p class="eyebrow">Contact</p>
-    <h1>Connect with the lab</h1>
-    <p class="lede">Questions about the research program, student work, or professional collaboration are welcome.</p>
+    <h1>Contact</h1>
+    <p class="lede">Contact the lab director about senior research, student projects, or research collaboration.</p>
   </header>
   <div class="contact-layout">
     <section class="contact-card director-card" aria-labelledby="director-title">
       <p class="rail-label">Lab director</p>
       <h2 id="director-title">{esc(site['director_name'])}</h2>
       <p class="director-role">Director, Astronomy &amp; Astrophysics Research</p>
-      <p>Theoretical and mathematical physicist, educator, and research mentor at Thomas Jefferson High School for Science and Technology.</p>
+      <p>Thomas Jefferson High School for Science and Technology</p>
       <a class="button primary" href="mailto:{email}">Email the lab director</a>
     </section>
     <section class="profile-panel" aria-labelledby="profiles-title">
       <p class="rail-label">Professional record</p>
-      <h2 id="profiles-title">Profiles and publications</h2>
+      <h2 id="profiles-title">Professional profiles</h2>
       <div class="profile-links">{profile_links}</div>
     </section>
   </div>
@@ -355,33 +353,33 @@ def partners_page(data: dict) -> tuple[str, str, str, str]:
     content = f"""
 <div class="page-shell article-shell wide-article-shell">
   <header class="page-heading">
-    <p class="eyebrow">Partners</p>
-    <h1>Partners and collaborators</h1>
-    <p class="lede">We are grateful to the research organizations, universities, and supporters whose professional communities strengthen scientific opportunities for TJ students.</p>
+    <h1>Partners</h1>
+    <p class="lede">Astro Lab students have worked with researchers and received support from the organizations and universities listed below.</p>
   </header>
   <section class="partner-section" aria-labelledby="research-partners-title">
     <p class="rail-label">Research partners</p>
     <h2 id="research-partners-title">Organizations and universities</h2>
     <div class="institution-grid">{partners}</div>
   </section>
-  <section class="partner-section" aria-labelledby="supporters-title">
-    <p class="rail-label">Support</p>
-    <h2 id="supporters-title">Supporting donor</h2>
-    <div class="institution-grid supporter-grid">{supporters}</div>
-  </section>
-  <section class="practicum-card" aria-labelledby="practicum-title">
-    <div>
-      <p class="rail-label">A distinct senior-research path</p>
-      <h2 id="practicum-title">{esc(practicum['name'])}</h2>
-      <p>{esc(practicum['description'])}</p>
-    </div>
-    <a class="button" href="{esc(practicum['url'])}">Visit Research Practicum</a>
-  </section>
+  <div class="partner-support-grid">
+    <section class="partner-section supporter-section" aria-labelledby="supporters-title">
+      <h2 id="supporters-title">Donor support</h2>
+      <div class="institution-grid supporter-grid">{supporters}</div>
+    </section>
+    <section class="practicum-card" aria-labelledby="practicum-title">
+      <div>
+        <p class="rail-label">Off-site senior research</p>
+        <h2 id="practicum-title">{esc(practicum['name'])}</h2>
+        <p>{esc(practicum['description'])}</p>
+      </div>
+      <a class="button" href="{esc(practicum['url'])}">Visit Research Practicum</a>
+    </section>
+  </div>
   <section class="collaboration-card" aria-labelledby="collaborate-title">
     <div>
-      <p class="eyebrow">For external researchers and organizations</p>
-      <h2 id="collaborate-title">Interested in collaborating?</h2>
-      <p>We welcome conversations about research mentorship, scientific resources, and project-specific collaboration.</p>
+      <p class="eyebrow">For researchers and organizations</p>
+      <h2 id="collaborate-title">Collaborate with Astro Lab</h2>
+      <p>Researchers interested in mentoring a project, sharing resources, or proposing a collaboration can contact the lab director.</p>
     </div>
     <div class="card-actions">
       <a class="button primary" href="mailto:{email}">Email William D. Linch III</a>
