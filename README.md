@@ -5,7 +5,7 @@ This repository is the public source for the static site served at
 
 ## Site structure
 
-- `data/site.json` is the authority for annual project content, credits, and artifact links.
+- `data/site.json` is the authority for family navigation, annual project content, credits, and artifact links.
 - `scripts/build_site.py` generates ordinary static HTML with no server-side dependencies.
 - `assets/site.css` contains the shared visual system.
 - `assets/countdown.js` progressively enhances the static tjSTAR date.

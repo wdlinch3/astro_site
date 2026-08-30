@@ -8,7 +8,14 @@
     "tjstar_display": "May 19, 2027 at 8:40 a.m.",
     "director_name": "William D. Linch III",
     "contact_email": "wdlinch3@gmail.com",
-    "show_project_credits": true
+    "show_project_credits": true,
+    "school_url": "https://tjhsst.fcps.edu/",
+    "family_links": [
+      {"label": "Classes", "url": "https://astro2627.sites.tjhsst.edu/ss/2026-2027/"},
+      {"label": "Research Lab", "current": true},
+      {"label": "Astro Club", "url": "https://activities.tjhsst.edu/astronomyclub/"},
+      {"label": "Astro Team"}
+    ]
   },
   "years": [
     {"slug": "2025-26", "label": "2025-26"}

@@ -144,13 +144,34 @@ h3 {
   color: var(--text);
   font-size: 0.93rem;
   font-weight: 700;
-  text-decoration: none;
 }
 
 .site-mark-kicker {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: var(--accent);
   font-size: 0.72rem;
   letter-spacing: 0.1em;
+  text-decoration: none;
+}
+
+.site-mark-kicker:hover,
+.site-name:hover {
+  color: var(--accent-strong);
+}
+
+.site-mark-separator {
+  color: var(--soft);
+  font-weight: 400;
+}
+
+.site-name {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--text);
+  text-decoration: none;
 }
 
 nav ul {
@@ -177,6 +198,73 @@ nav ul {
 .site-header nav a[aria-current="page"] {
   background: rgba(103, 196, 255, 0.11);
   color: var(--text);
+}
+
+.family-strip {
+  border-bottom: 1px solid rgba(183, 216, 255, 0.11);
+  background: rgba(5, 13, 25, 0.76);
+}
+
+.family-inner {
+  display: flex;
+  align-items: center;
+  width: min(var(--max-width), calc(100% - 32px));
+  min-height: 40px;
+  margin: 0 auto;
+  gap: 1rem;
+}
+
+.family-label {
+  flex: 0 0 auto;
+  color: var(--gold);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.family-strip ul {
+  gap: 0;
+}
+
+.family-strip li {
+  display: flex;
+  align-items: center;
+  color: var(--soft);
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.family-strip li + li::before {
+  margin: 0 0.6rem;
+  color: rgba(196, 210, 227, 0.45);
+  content: "·";
+}
+
+.family-strip a,
+.family-strip span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+}
+
+.family-strip a {
+  color: var(--muted);
+  text-decoration-color: rgba(103, 196, 255, 0.45);
+  text-underline-offset: 0.18em;
+}
+
+.family-strip a:hover {
+  color: var(--accent-strong);
+}
+
+.family-current {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.family-placeholder {
+  color: var(--soft);
 }
 
 .home-shell,
@@ -752,6 +840,22 @@ nav ul {
 
   .site-mark {
     font-size: 0.87rem;
+    gap: 0.5rem;
+  }
+
+  .family-strip {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .family-strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .family-inner {
+    width: max-content;
+    min-width: 100%;
+    padding: 0 12px;
   }
 
   .site-header nav {

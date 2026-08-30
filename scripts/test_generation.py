@@ -35,6 +35,12 @@ def main() -> int:
     assert "1 projects" not in rendered["research/index.html"]
     assert "2025-26" in rendered["research/index.html"]
     assert "2026-27" in rendered["research/index.html"]
+    assert '<span class="site-name" aria-current="page">Astronomy &amp; Astrophysics Research</span>' in rendered["index.html"]
+    assert '<a class="site-name" href="../index.html">Astronomy &amp; Astrophysics Research</a>' in rendered["about/index.html"]
+    assert '<a class="site-mark-kicker" href="https://tjhsst.fcps.edu/">TJHSST</a>' in rendered["index.html"]
+    assert '<span class="family-placeholder">Astro Team</span>' in rendered["index.html"]
+    assert "Astro at TJ" in rendered["index.html"]
+    assert ">Classes</a>" in rendered["index.html"]
 
     print("Generation tests passed: 2025-26 URLs remain stable when 2026-27 is added.")
     return 0
