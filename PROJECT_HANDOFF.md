@@ -4,12 +4,11 @@ Last updated: 2026-08-30
 
 ## Current state
 
-The first substantial implementation is on branch
-`codex/build-project-archive` in open PR #2:
+The first substantial implementation was merged through PR #2:
 
 <https://github.com/wdlinch3/astro_site/pull/2>
 
-At commit `1c160a5`, the branch contains:
+Through implementation commit `1c160a5`, the site contains:
 
 - the landing page, Research, About, Partners, TJ Labs, and Contact;
 - a 2025-26 archive with eight concise project records;
@@ -21,8 +20,9 @@ At commit `1c160a5`, the branch contains:
 - the privacy rule that exposes HTML student credits only for explicitly marked
   external collaborations.
 
-The branch is pushed but unmerged. Nothing from PR #2 has been pulled to
-Director or anonymously verified on the live TJHSST site.
+The documentation in `AGENTS.md` and this handoff is proposed separately in
+open PR #3. Nothing was pulled to Director or anonymously verified on the live
+TJHSST site as part of this work.
 
 ## Before the first deployment
 
@@ -30,8 +30,8 @@ Director or anonymously verified on the live TJHSST site.
    disclosure.
 2. Confirm with Tiger that Director's `public` directory should remain a Git
    checkout and that direct server-side edits are outside the normal workflow.
-3. Review PR #2, merge only after approval, then use `git pull --ff-only` in the
-   Director checkout.
+3. When deployment is authorized, confirm the intended revision on `main`, then
+   use `git pull --ff-only` in the Director checkout.
 4. Verify the live site anonymously, including the homepage, all primary pages,
    all eight project records, papers/posters, family links, and mobile behavior.
 
@@ -108,4 +108,3 @@ Director or anonymously verified on the live TJHSST site.
 Extend the site from evidence and actual recurring needs. Preserve the compact,
 matter-of-fact tone: show what the lab is doing, make the useful paths obvious,
 and invite contact without promotional language.
-
