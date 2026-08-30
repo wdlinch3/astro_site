@@ -29,7 +29,8 @@ def main() -> int:
     assert "2025-26/index.html" in rendered
     assert "2026-27/future-fixture/index.html" in rendered
     assert "2026-27/index.html" in rendered
-    assert "Explore 2026-27 projects" in rendered["index.html"]
+    assert "Explore 2026-27 projects" not in rendered["index.html"]
+    assert "How the lab works" in rendered["index.html"]
     assert "1 project record" in rendered["index.html"]
     assert "1 project spanning exoplanets." in rendered["research/index.html"]
     assert "1 projects" not in rendered["research/index.html"]
@@ -41,6 +42,31 @@ def main() -> int:
     assert '<span class="family-placeholder">Astro Team</span>' in rendered["index.html"]
     assert "Astro at TJ" in rendered["index.html"]
     assert ">Classes</a>" in rendered["index.html"]
+    assert "partners/index.html" in rendered
+    assert "labs/index.html" in rendered
+    assert ">Partners</a>" in rendered["index.html"]
+    assert ">TJ Labs</a>" in rendered["index.html"]
+    assert "0000-0003-2631-4465" in rendered["contact/index.html"]
+    assert "Research Practicum Program" in rendered["partners/index.html"]
+    assert "Research Practicum Program" in rendered["labs/index.html"]
+    assert "Project credits" not in rendered["2025-26/exomoon-wobble/index.html"]
+    assert "Project credits" in rendered["2025-26/v-sparc/index.html"]
+    assert 'href="Final_paper/exomoon.pdf">Paper</a>' in rendered["2025-26/index.html"]
+    assert "Next tjSTAR" in rendered["index.html"]
+    assert "A year built around evidence" not in rendered["index.html"]
+    assert 'aria-current="page">Partners</a>' in rendered["partners/index.html"]
+    assert 'aria-current="page">TJ Labs</a>' in rendered["labs/index.html"]
+
+    for project in data["projects"]:
+        year_html = rendered[f"{project['year']}/index.html"]
+        for artifact in project["artifacts"]:
+            expected = build_site.href(f"{project['year']}/index.html", artifact["path"])
+            assert f'href="{expected}">{artifact["label"]}</a>' in year_html
+        assert f'href="{project["tjstar_url"].replace("&", "&amp;")}">tjSTAR record</a>' in year_html
+
+    for page_html in rendered.values():
+        assert "TJSTAR" not in page_html
+        assert "TJStar" not in page_html
 
     print("Generation tests passed: 2025-26 URLs remain stable when 2026-27 is added.")
     return 0

@@ -92,12 +92,8 @@ def layout(
     full_title = site["full_name"]
     page_title = full_title if title == full_title else f"{title} | {site['name']}"
     nav = "".join(
-        [
-            f"<li>{nav_link(output_path, 'index.html', 'Home', active == 'home')}</li>",
-            f"<li>{nav_link(output_path, 'research/index.html', 'Research', active == 'research')}</li>",
-            f"<li>{nav_link(output_path, 'about/index.html', 'About', active == 'about')}</li>",
-            f"<li>{nav_link(output_path, 'contact/index.html', 'Contact', active == 'contact')}</li>",
-        ]
+        f"<li>{nav_link(output_path, item['path'], item['label'], active == item['key'])}</li>"
+        for item in site["primary_nav"]
     )
     css = href(output_path, "assets/site.css")
     js = href(output_path, "assets/countdown.js")
@@ -147,8 +143,9 @@ def layout(
 """
 
 
-def countdown(site: dict) -> str:
-    return f"""<div class="tjstar-marker">
+def countdown(site: dict, featured: bool = False) -> str:
+    classes = "tjstar-marker deadline-card" if featured else "tjstar-marker"
+    return f"""<div class="{classes}">
   <p class="rail-label">Next tjSTAR</p>
   <time datetime="{esc(site['tjstar_datetime'])}">{esc(site['tjstar_display'])}</time>
   <span class="countdown" data-tjstar-countdown="{esc(site['tjstar_datetime'])}" aria-hidden="true"></span>
@@ -158,12 +155,17 @@ def countdown(site: dict) -> str:
 
 def project_card(project: dict, output_path: str, heading_level: int = 3) -> str:
     target = f"{project['year']}/{project['slug']}/index.html"
-    artifact_labels = " · ".join(esc(item["label"]) for item in project["artifacts"])
+    available = [
+        f'<a href="{esc(href(output_path, item["path"]))}">{esc(item["label"])}</a>'
+        for item in project["artifacts"]
+    ]
+    available.append(f'<a href="{esc(project["tjstar_url"])}">tjSTAR record</a>')
+    available_links = ' <span aria-hidden="true">·</span> '.join(available)
     return f"""<article class="project-card">
   <p class="project-topic">{esc(project['topic'])}</p>
   <h{heading_level}><a href="{esc(href(output_path, target))}">{esc(project['title'])}</a></h{heading_level}>
   <p>{esc(project['summary'])}</p>
-  <p class="project-availability">Available: {artifact_labels} · tjSTAR record</p>
+  <p class="project-availability"><span>Available:</span> {available_links}</p>
 </article>"""
 
 
@@ -185,19 +187,20 @@ def home_page(data: dict) -> tuple[str, str, str, str]:
       <h1 id="page-title">{esc(site['full_name'])}</h1>
       <p class="lede">TJHSST's senior research laboratory for sustained work in astronomy, astrophysics, astronomical data analysis, instrumentation, and computational modeling.</p>
       <div class="quick-actions" aria-label="Featured actions">
-        <a class="button primary" href="{esc(archive_link)}">Explore {esc(year['label'])} projects</a>
-        <a class="button" href="{esc(href(output, 'about/index.html'))}">How the lab works</a>
+        <a class="button primary" href="{esc(href(output, 'about/index.html'))}">How the lab works</a>
       </div>
     </section>
-    <aside class="research-rail" aria-labelledby="research-now-title">
-      <p class="rail-label">Research archive</p>
-      <h2 id="research-now-title">Latest work</h2>
-      <a class="year-link" href="{esc(archive_link)}">
-        <span>{esc(year['label'])}</span>
-        <small>{len(projects)} {noun(len(projects), 'project record')}</small>
-      </a>
-      <a class="rail-link" href="{esc(research_link)}">Browse research by year</a>
-      {countdown(site)}
+    <aside class="home-sidebar" aria-label="Research deadlines and archive">
+      {countdown(site, featured=True)}
+      <div class="research-rail" aria-labelledby="research-now-title">
+        <p class="rail-label">Research archive</p>
+        <h2 id="research-now-title">Latest work</h2>
+        <a class="year-link" href="{esc(archive_link)}">
+          <span>{esc(year['label'])}</span>
+          <small>{len(projects)} {noun(len(projects), 'project record')}</small>
+        </a>
+        <a class="rail-link" href="{esc(research_link)}">Browse research by year</a>
+      </div>
     </aside>
   </div>
 
@@ -212,15 +215,6 @@ def home_page(data: dict) -> tuple[str, str, str, str]:
     <div class="project-grid">{featured}</div>
   </section>
 
-  <section class="home-section compact-section" aria-labelledby="work-title">
-    <div class="section-heading narrow-heading">
-      <div>
-        <p class="eyebrow">The work</p>
-        <h2 id="work-title">A year built around evidence</h2>
-      </div>
-      <p>Students frame research questions, read technical literature, select defensible methods, analyze uncertainty, and communicate what their evidence supports.</p>
-    </div>
-  </section>
 </div>"""
     return output, site["full_name"], "TJHSST's senior research laboratory for astronomy and astrophysics.", content
 
@@ -262,6 +256,8 @@ def research_page(data: dict) -> tuple[str, str, str, str]:
 
 
 def about_page(data: dict) -> tuple[str, str, str, str]:
+    site = data["site"]
+    classes_url = next(item["url"] for item in site["family_links"] if item["label"] == "Classes")
     output = "about/index.html"
     content = f"""
 <div class="page-shell article-shell">
@@ -277,6 +273,12 @@ def about_page(data: dict) -> tuple[str, str, str, str]:
       <article><h3>Investigate</h3><p>Use observations, archives, computation, simulation, or instrumentation while recording choices and uncertainty.</p></article>
       <article><h3>Communicate</h3><p>Explain methods and conclusions through research writing, posters, talks, and critique from a scientific audience.</p></article>
     </div>
+  </section>
+  <section class="content-section prospective-section" aria-labelledby="prospective-title">
+    <p class="eyebrow">For prospective students</p>
+    <h2 id="prospective-title">Preparing for senior research</h2>
+    <p>Junior students interested in senior research in Astro Lab are encouraged to build their astronomy background through TJ's Advanced Astronomy electives. The electives support later research work with shared scientific context, quantitative methods, and astronomical problem solving.</p>
+    <p class="quiet-link"><a href="{esc(classes_url)}">View the current Classes site</a></p>
   </section>
   <section class="content-section split-section" aria-labelledby="modes-title">
     <div>
@@ -305,6 +307,12 @@ def contact_page(data: dict) -> tuple[str, str, str, str]:
     site = data["site"]
     output = "contact/index.html"
     email = esc(site["contact_email"])
+    profile_links = "\n".join(
+        f'''<a class="profile-link" href="{esc(item['url'])}">
+  <span>{esc(item['label'])}</span><small>{esc(item['detail'])}</small>
+</a>'''
+        for item in site["director_profiles"]
+    )
     content = f"""
 <div class="page-shell article-shell">
   <header class="page-heading">
@@ -312,14 +320,112 @@ def contact_page(data: dict) -> tuple[str, str, str, str]:
     <h1>Connect with the lab</h1>
     <p class="lede">Questions about the research program, student work, or professional collaboration are welcome.</p>
   </header>
-  <section class="contact-card" aria-labelledby="director-title">
-    <p class="rail-label">Lab director</p>
-    <h2 id="director-title">{esc(site['director_name'])}</h2>
-    <p>Thomas Jefferson High School for Science and Technology</p>
-    <a class="button primary" href="mailto:{email}">Email the lab director</a>
-  </section>
+  <div class="contact-layout">
+    <section class="contact-card director-card" aria-labelledby="director-title">
+      <p class="rail-label">Lab director</p>
+      <h2 id="director-title">{esc(site['director_name'])}</h2>
+      <p class="director-role">Director, Astronomy &amp; Astrophysics Research</p>
+      <p>Theoretical and mathematical physicist, educator, and research mentor at Thomas Jefferson High School for Science and Technology.</p>
+      <a class="button primary" href="mailto:{email}">Email the lab director</a>
+    </section>
+    <section class="profile-panel" aria-labelledby="profiles-title">
+      <p class="rail-label">Professional record</p>
+      <h2 id="profiles-title">Profiles and publications</h2>
+      <div class="profile-links">{profile_links}</div>
+    </section>
+  </div>
 </div>"""
     return output, "Contact", "Contact the TJHSST Astronomy & Astrophysics Research Lab.", content
+
+
+def institution_card(item: dict) -> str:
+    return f'''<a class="institution-card" href="{esc(item['url'])}">
+  <span class="institution-mark" aria-hidden="true">{esc(item['short'])}</span>
+  <span class="institution-copy"><small>{esc(item['kind'])}</small><strong>{esc(item['name'])}</strong></span>
+</a>'''
+
+
+def partners_page(data: dict) -> tuple[str, str, str, str]:
+    site = data["site"]
+    output = "partners/index.html"
+    email = esc(site["contact_email"])
+    partners = "\n".join(institution_card(item) for item in data["partners"])
+    supporters = "\n".join(institution_card(item) for item in data["supporters"])
+    practicum = data["research_practicum"]
+    content = f"""
+<div class="page-shell article-shell wide-article-shell">
+  <header class="page-heading">
+    <p class="eyebrow">Partners</p>
+    <h1>Partners and collaborators</h1>
+    <p class="lede">We are grateful to the research organizations, universities, and supporters whose professional communities strengthen scientific opportunities for TJ students.</p>
+  </header>
+  <section class="partner-section" aria-labelledby="research-partners-title">
+    <p class="rail-label">Research partners</p>
+    <h2 id="research-partners-title">Organizations and universities</h2>
+    <div class="institution-grid">{partners}</div>
+  </section>
+  <section class="partner-section" aria-labelledby="supporters-title">
+    <p class="rail-label">Support</p>
+    <h2 id="supporters-title">Supporting donor</h2>
+    <div class="institution-grid supporter-grid">{supporters}</div>
+  </section>
+  <section class="practicum-card" aria-labelledby="practicum-title">
+    <div>
+      <p class="rail-label">A distinct senior-research path</p>
+      <h2 id="practicum-title">{esc(practicum['name'])}</h2>
+      <p>{esc(practicum['description'])}</p>
+    </div>
+    <a class="button" href="{esc(practicum['url'])}">Visit Research Practicum</a>
+  </section>
+  <section class="collaboration-card" aria-labelledby="collaborate-title">
+    <div>
+      <p class="eyebrow">For external researchers and organizations</p>
+      <h2 id="collaborate-title">Interested in collaborating?</h2>
+      <p>We welcome conversations about research mentorship, scientific resources, and project-specific collaboration.</p>
+    </div>
+    <div class="card-actions">
+      <a class="button primary" href="mailto:{email}">Email William D. Linch III</a>
+      <a class="button" href="{esc(href(output, 'contact/index.html'))}">Contact information</a>
+    </div>
+  </section>
+</div>"""
+    return output, "Partners", "Research partners and supporters of the TJHSST Astronomy & Astrophysics Research Lab.", content
+
+
+def labs_page(data: dict) -> tuple[str, str, str, str]:
+    output = "labs/index.html"
+    lab_data = data["tj_labs"]
+    practicum = data["research_practicum"]
+    cards: list[str] = []
+    for item in lab_data["labs"]:
+        link = ""
+        if item.get("url"):
+            link = f'  <a href="{esc(item["url"])}">{esc(item.get("link_label", "Visit lab site"))}</a>'
+        cards.append(f'''<article class="lab-card">
+  <h2>{esc(item['name'])}</h2>
+{link}
+</article>''')
+    content = f"""
+<div class="page-shell wide-article-shell">
+  <header class="page-heading">
+    <p class="eyebrow">TJ senior research</p>
+    <h1>Other TJ research labs</h1>
+    <p class="lede">TJHSST's senior research program includes eight other on-campus laboratories spanning science, engineering, and computing.</p>
+    <p class="quiet-link"><a href="{esc(lab_data['overview_url'])}">View the official TJHSST Senior Research Labs overview</a></p>
+  </header>
+  <section aria-label="Other on-campus research labs">
+    <div class="lab-grid">{''.join(cards)}</div>
+  </section>
+  <section class="practicum-card labs-practicum" aria-labelledby="labs-practicum-title">
+    <div>
+      <p class="rail-label">Off-site alternative</p>
+      <h2 id="labs-practicum-title">{esc(practicum['name'])}</h2>
+      <p>{esc(practicum['description'])}</p>
+    </div>
+    <a class="button primary" href="{esc(practicum['url'])}">Explore Research Practicum</a>
+  </section>
+</div>"""
+    return output, "TJ Labs", "Explore TJHSST's other senior research labs and the Research Practicum alternative.", content
 
 
 def artifact_link(item: dict, output_path: str) -> str:
@@ -365,7 +471,7 @@ def project_page(data: dict, project: dict) -> tuple[str, str, str, str]:
   <p>{esc(project['collaboration'])}</p>
 </section>"""
     credits = ""
-    if site.get("show_project_credits") and project.get("credits"):
+    if site.get("show_project_credits") and project.get("credits") and project.get("external_collaboration"):
         credits = f"""<details class="project-credits">
   <summary>Project credits</summary>
   <p>Student researchers: {esc(', '.join(project['credits']))}</p>
@@ -410,7 +516,7 @@ def project_page(data: dict, project: dict) -> tuple[str, str, str, str]:
       <div class="artifact-list">{artifact_links}{tjstar}</div>
       <p class="artifact-note">The HTML record is a concise public account. Papers and posters retain the project's full presentation and authorship.</p>
       <a class="back-link" href="{esc(href(output, f'{year_slug}/index.html'))}">Back to all {esc(year['label'])} projects</a>
-      {credits}
+{credits}
     </aside>
   </div>
 </div>"""
@@ -423,6 +529,8 @@ def render_all(data: dict) -> dict[str, str]:
         (*home_page(data), "home"),
         (*research_page(data), "research"),
         (*about_page(data), "about"),
+        (*partners_page(data), "partners"),
+        (*labs_page(data), "labs"),
         (*contact_page(data), "contact"),
     ]
     specifications.extend((*year_page(data, year), "research") for year in data["years"])

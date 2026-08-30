@@ -5,7 +5,7 @@ This repository is the public source for the static site served at
 
 ## Site structure
 
-- `data/site.json` is the authority for family navigation, annual project content, credits, and artifact links.
+- `data/site.json` is the authority for navigation, professional profiles, partners, TJ labs, annual project content, credits, and artifact links.
 - `scripts/build_site.py` generates ordinary static HTML with no server-side dependencies.
 - `assets/site.css` contains the shared visual system.
 - `assets/countdown.js` progressively enhances the static tjSTAR date.
@@ -26,7 +26,7 @@ node scripts/test_countdown.mjs
 The check command regenerates every managed HTML page in memory and fails if a committed page is stale or missing.
 The site check crawls local links case-sensitively, validates basic document structure, and confirms the public artifact manifest.
 
-Project credits are intentionally subdued but public. If an administrator requests their removal, delete each `credits` array from `data/site.json`, set `show_project_credits` to `false`, regenerate, and run the checks. The checker rejects a disabled display while names remain in the publicly served data file. Papers and posters remain unredacted unless the administrative request also requires removing or replacing those artifacts.
+Project credits are public only when a project records `external_collaboration: true` and supplies a public `collaboration` description. The checker enforces both conditions. To remove all HTML credit disclosures, delete every `credits` array from `data/site.json`, set `show_project_credits` to `false`, regenerate, and run the checks. Papers and posters remain unredacted unless an administrative request also requires removing or replacing those artifacts.
 
 ## Publication workflow
 

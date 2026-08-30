@@ -158,6 +158,10 @@ def main() -> int:
             errors.append(f"data/site.json: undeclared year for {project['slug']}")
         if not all(project.get(key) for key in ("question", "significance", "method", "result")):
             errors.append(f"data/site.json: incomplete public record for {project['slug']}")
+        if project.get("credits") and not project.get("external_collaboration"):
+            errors.append(f"data/site.json: credits require external_collaboration for {project['slug']}")
+        if project.get("external_collaboration") and not project.get("collaboration"):
+            errors.append(f"data/site.json: external collaboration lacks a public description for {project['slug']}")
         for artifact in project["artifacts"]:
             artifact_path = ROOT / artifact["path"]
             if not artifact_path.is_file():
