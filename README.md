@@ -5,6 +5,8 @@ This repository is the public source for the static site served at
 
 ## Site structure
 
+- `AGENTS.md` records the project's durable design, content, audit, and release conventions.
+- `PROJECT_HANDOFF.md` records current status, unresolved decisions, and next work.
 - `data/site.json` is the authority for navigation, professional profiles, partners, TJ labs, annual project content, credits, and artifact links.
 - `scripts/build_site.py` generates ordinary static HTML with no server-side dependencies.
 - `assets/site.css` contains the shared visual system.
