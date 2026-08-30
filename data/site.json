@@ -1,0 +1,150 @@
+{
+  "site": {
+    "name": "TJHSST Astronomy & Astrophysics",
+    "full_name": "Laboratory for Astronomy & Astrophysics Research",
+    "latest_year": "2025-26",
+    "tjstar_url": "https://activities.tjhsst.edu/tjstar/presentations/?category=astro",
+    "tjstar_datetime": "2027-05-19T08:40:00-04:00",
+    "tjstar_display": "May 19, 2027 at 8:40 a.m.",
+    "contact_email": "wdlinch3@gmail.com",
+    "show_project_credits": true
+  },
+  "years": [
+    {"slug": "2025-26", "label": "2025-26"}
+  ],
+  "projects": [
+    {
+      "year": "2025-26",
+      "slug": "exomoon-wobble",
+      "topic": "Exoplanets",
+      "title": "Analyzing VLTI/GRAVITY Data of Beta Pictoris b for Exomoon-Induced Exoplanetary Wobble",
+      "summary": "A search for an exomoon signal in the tiny astrometric motion of a directly imaged exoplanet.",
+      "question": "Can an exomoon around Beta Pictoris b be detected through the small astrometric wobble it would induce in the planet's motion?",
+      "significance": "A confirmed exomoon would illuminate satellite and planetary-system formation while extending moon searches beyond transit surveys.",
+      "method": "The team reduced VLTI/GRAVITY interferometric observations with EsoRex and ExoGravity, fitted a two-planet Keplerian baseline with orbitize!, and examined the remaining astrometric residuals for a moon-induced signal.",
+      "result": "No exomoon was detected. Residuals remained at the scale of tens of milliarcseconds, well above an expected signal of tens to hundreds of microarcseconds, because the short observational baseline did not constrain the planetary orbit closely enough.",
+      "credits": ["Emma Zheng", "Arbar Sharif", "Thao Nhi Nguyen", "Madeleine Morse-Hill", "Saji Alqadhi"],
+      "artifacts": [
+        {"label": "Paper", "path": "2025-26/Final_paper/exomoon.pdf"},
+        {"label": "Poster", "path": "2025-26/Final_poster/exomoon.pdf"}
+      ],
+      "tjstar_url": "https://activities.tjhsst.edu/tjstar/presentations/?q=Exomoon-Induced&category=astro"
+    },
+    {
+      "year": "2025-26",
+      "slug": "pbh-qcd-formation",
+      "topic": "Early universe",
+      "title": "Primordial Black Hole Formation from QCD-like Equation-of-State Transitions",
+      "summary": "A numerical-relativity study of how an early-universe phase transition can change the threshold for black-hole collapse.",
+      "question": "How do the depth and duration of a QCD-like softening of the early universe's equation of state affect the threshold for primordial-black-hole collapse?",
+      "significance": "Primordial-black-hole production is highly sensitive to the collapse threshold, and QCD-era formation naturally corresponds to roughly solar-mass black holes.",
+      "method": "The team evolved spherical overdensities with a one-dimensional Misner-Sharp relativistic-collapse solver, distinguished the equation-of-state parameter from the sound speed, and tested parametric crossover widths and depths after benchmarking the solver in radiation domination.",
+      "result": "The solver reproduced the radiation-era threshold within 1.3%. In the chosen QCD-like model, broadening the transition lowered the collapse threshold by approximately 27-44%, showing a large but strongly model-dependent sensitivity in the predicted abundance.",
+      "credits": ["Hanseon Lee", "Oliver Kiker", "Caleb Jobe"],
+      "artifacts": [
+        {"label": "Paper", "path": "2025-26/Final_paper/pbh_formation.pdf"}
+      ],
+      "tjstar_url": "https://activities.tjhsst.edu/tjstar/presentations/?q=QCD-like&category=astro"
+    },
+    {
+      "year": "2025-26",
+      "slug": "little-red-dots",
+      "topic": "Black-hole origins",
+      "title": "Constraining Black-Hole Seeds with JWST Little Red Dots",
+      "summary": "A comparison of light and heavy seed-growth histories for massive black holes observed early in cosmic history.",
+      "question": "Can stellar-remnant seeds grow quickly enough to reproduce the massive black holes inferred in Little Red Dots, or do the observations favor heavier initial seeds?",
+      "significance": "Massive black holes apparently present within the universe's first billion years strain ordinary stellar-seed growth timescales.",
+      "method": "The team compared analytic Eddington-limited growth histories and semi-analytic halo-growth calculations with published Little Red Dot mass and redshift estimates and with available multi-wavelength constraints.",
+      "result": "Within the modeled assumptions, approximately 100-solar-mass stellar seeds generally required sustained near- or super-Eddington growth. Heavy seeds of 10,000 to 1,000,000 solar masses reached the inferred masses under more moderate accretion histories. The comparison favors a heavy-seed category rather than a uniquely primordial origin.",
+      "credits": ["Mohammed Hashemi", "Kartik Gaur", "Brandon Arevalo-Herrera", "Aashaz Ahmad"],
+      "artifacts": [
+        {"label": "Paper", "path": "2025-26/Final_paper/pbh_lrd.pdf"},
+        {"label": "Poster", "path": "2025-26/Final_poster/pbh_lrd.pdf"}
+      ],
+      "tjstar_url": "https://activities.tjhsst.edu/tjstar/presentations/?q=Little+Red+Dots&category=astro"
+    },
+    {
+      "year": "2025-26",
+      "slug": "primordial-feedback-simulation",
+      "topic": "Computational astrophysics",
+      "title": "Primordial Black Holes and Population III Star Formation",
+      "summary": "An exploratory particle simulation of how central black-hole mass relates to star formation in an early-galaxy model.",
+      "question": "In a particle-based early-galaxy model, how does the mass of a central primordial black hole affect the formation of Population III stars?",
+      "significance": "Early black holes and primordial stars may influence one another's formation, shaping models of the first galaxies and black-hole growth.",
+      "method": "The team built a C++ smoothed-particle-hydrodynamics simulation with Barnes-Hut gravity, quadtree neighbor searches, leapfrog integration, an isothermal gas model, and a Jeans-density star-formation threshold, then compared runs with different central black-hole masses.",
+      "result": "In this exploratory model, higher central black-hole masses were associated with fewer stars at the end of a run. The fitted final star count declined approximately exponentially with black-hole mass; the model did not include black-hole growth or radiative feedback.",
+      "credits": ["Eric Xie", "Shreraj Singh Sainani", "Petr Kisselev", "Tayne Han"],
+      "artifacts": [
+        {"label": "Paper", "path": "2025-26/Final_paper/pbh_seed_sim.pdf"},
+        {"label": "Poster", "path": "2025-26/Final_poster/pbh_seed_sim.pdf"}
+      ],
+      "tjstar_url": "https://activities.tjhsst.edu/tjstar/presentations/?q=Co-Evolutions&category=astro"
+    },
+    {
+      "year": "2025-26",
+      "slug": "fermi-bubbles",
+      "topic": "Galactic center",
+      "title": "Investigating the Origins of the Fermi Bubbles with CMHD Simulations",
+      "summary": "A simulation-based comparison of two explanations for the enormous bipolar structures above and below the Milky Way.",
+      "question": "Which proposed origin better reproduces the Fermi Bubbles: episodic jets from Sagittarius A* or sustained star-formation-driven Galactic winds?",
+      "significance": "Distinguishing these models would clarify the recent energetic history of the Galactic Center.",
+      "method": "The team used the PLUTO computational magnetohydrodynamics code to model an active-galactic-nucleus jet scenario and a Galactic-wind scenario, then compared their large-scale morphologies with the observed bubble structure.",
+      "result": "Both models generated bipolar outflows. The jet model produced sharper, vertically directed lobes that the poster judged more consistent with Fermi-LAT morphology than the broader radial outflow from the Galactic-wind model. This was a morphological comparison, not a quantitative fit across observatories.",
+      "credits": ["Hicham Ouallah", "Anthony Guardado-Murillo", "Kalab Aklilu", "Tayyab Ahmed"],
+      "artifacts": [
+        {"label": "Poster", "path": "2025-26/Final_poster/fermi_bubbles.png"}
+      ],
+      "tjstar_url": "https://activities.tjhsst.edu/tjstar/presentations/?category=astro&q=Fermi%20Bubbles"
+    },
+    {
+      "year": "2025-26",
+      "slug": "spinni",
+      "topic": "Instrumentation",
+      "title": "SPINNI: A Miniaturized Sagnac Interferometer",
+      "summary": "A compact optical prototype designed toward portable planetary rotation measurements.",
+      "question": "Can a Sagnac interferometer be miniaturized into a portable instrument suitable for a planetary rover?",
+      "significance": "A portable Sagnac instrument could eventually support measurements of planetary rotation, precession, and nutation away from Earth.",
+      "method": "The team built a compact helium-neon laser interferometer using a beam splitter, mirrors, wave plates, and a detector; tested it on a seismic-isolation table; and designed a rotating platform and overhead laser support in CAD.",
+      "result": "The compact prototype produced the Sagnac interference effect. The retained evidence does not establish a quantitative rotation-rate measurement.",
+      "credits": ["Amy Steinhardt", "Mara Portillo Arce", "Malvika Dias", "Annie Chiu"],
+      "artifacts": [
+        {"label": "Poster", "path": "2025-26/Final_poster/spinni.pdf"}
+      ],
+      "tjstar_url": "https://activities.tjhsst.edu/tjstar/presentations/?category=astro&q=SPINNI"
+    },
+    {
+      "year": "2025-26",
+      "slug": "tumbleweed-rover",
+      "topic": "Planetary engineering",
+      "title": "Building a Tumbleweed Rover for Mars",
+      "summary": "A lightweight wind-driven rover prototype and an initial attempt to scale terrestrial test results to Mars.",
+      "question": "Can a lightweight, wind-driven rover prototype be built and tested on Earth, then scaled to estimate performance under Martian conditions?",
+      "significance": "A simple, low-cost wind-driven rover could make distributed planetary exploration more practical.",
+      "method": "The team constructed a PEX-B frame with 3D-printed joints and fabric sails, measured its travel speed against wind speed, and explored gravity and atmospheric-density scaling for Martian conditions.",
+      "result": "Earth tests showed rover speed increasing approximately linearly with wind speed, with the poster reporting R-squared = 0.88. The retained artifact does not support a reliable quantitative statement about predicted Martian speed.",
+      "credits": ["Kyle Luu", "Karis Kim", "Julia Baer"],
+      "artifacts": [
+        {"label": "Poster", "path": "2025-26/Final_poster/tumbleweed.pdf"}
+      ],
+      "tjstar_url": "https://activities.tjhsst.edu/tjstar/presentations/?category=astro&q=Tumbleweed%20Rover"
+    },
+    {
+      "year": "2025-26",
+      "slug": "v-sparc",
+      "topic": "Radio transients",
+      "title": "V-SPARC: Detecting Long-Period Transients with VLITE",
+      "summary": "A search of archival low-frequency radio observations for rare sources that pulse on minute-to-hour timescales.",
+      "question": "Can archival VLITE radio observations reveal new long-period transients and constrain how much sky coverage future searches require?",
+      "significance": "Only a small population of long-period transients is known, leaving their abundance and physical origin poorly constrained.",
+      "method": "The team filtered VLITE configuration catalogs by signal-to-noise, compactness, catalog separation, and artifact indicators; inspected FITS images; cross-matched radio catalogs; recovered known transients as validation; and estimated fluence limits and areal burst density.",
+      "result": "No new long-period transient was confirmed. The search recovered known detections and estimated a bright-burst density near one per 100,000 square degrees of suitable survey coverage.",
+      "collaboration": "The project was conducted with Dr. Emil Polisensky of the U.S. Naval Research Laboratory.",
+      "credits": ["Sarah Trainer", "Anavi Nellutla", "Bowen MacGillivray", "Aarushi Kanigicherla"],
+      "artifacts": [
+        {"label": "Paper", "path": "2025-26/Final_paper/vsparc.pdf"},
+        {"label": "Poster", "path": "2025-26/Final_poster/vsparc.pdf"}
+      ],
+      "tjstar_url": "https://activities.tjhsst.edu/tjstar/presentations/?category=astro&q=V-SPARC"
+    }
+  ]
+}
