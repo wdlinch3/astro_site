@@ -39,7 +39,7 @@ def main() -> int:
     assert '<span class="site-name" aria-current="page">Astronomy &amp; Astrophysics Research</span>' in rendered["index.html"]
     assert '<a class="site-name" href="../index.html">Astronomy &amp; Astrophysics Research</a>' in rendered["about/index.html"]
     assert '<a class="site-mark-kicker" href="https://tjhsst.fcps.edu/">TJHSST</a>' in rendered["index.html"]
-    assert '<span class="family-placeholder">Astro Team</span>' in rendered["index.html"]
+    assert '<a href="https://activities.tjhsst.edu/astroteam/">Astro Team</a>' in rendered["index.html"]
     assert "Astro at TJ" in rendered["index.html"]
     assert ">Classes</a>" in rendered["index.html"]
     assert "partners/index.html" in rendered

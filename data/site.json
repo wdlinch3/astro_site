@@ -22,7 +22,7 @@
       {"label": "Classes", "url": "https://astro2627.sites.tjhsst.edu/ss/2026-2027/"},
       {"label": "Research Lab", "current": true},
       {"label": "Astro Club", "url": "https://activities.tjhsst.edu/astronomyclub/"},
-      {"label": "Astro Team"}
+      {"label": "Astro Team", "url": "https://activities.tjhsst.edu/astroteam/"}
     ],
     "director_profiles": [
       {"label": "Personal website", "detail": "wdlinch3.github.io", "url": "https://wdlinch3.github.io/"},
