@@ -61,14 +61,17 @@ def nav_link(output_path: str, target: str, label: str, active: bool) -> str:
     return f'<a href="{esc(href(output_path, target))}"{marker}>{esc(label)}</a>'
 
 
-def family_strip(site: dict) -> str:
+def family_strip(site: dict, output_path: str, active_key: str | None = None) -> str:
     items: list[str] = []
     for item in site["family_links"]:
         label = esc(item["label"])
-        if item.get("current"):
+        is_current = item.get("key") == active_key if active_key else item.get("current", False)
+        if is_current:
             content = f'<span class="family-current" aria-current="page">{label}</span>'
         elif item.get("url"):
             content = f'<a href="{esc(item["url"])}">{label}</a>'
+        elif item.get("path"):
+            content = f'<a href="{esc(href(output_path, item["path"]))}">{label}</a>'
         else:
             content = f'<span class="family-placeholder">{label}</span>'
         items.append(f"<li>{content}</li>")
@@ -88,6 +91,7 @@ def layout(
     active: str,
     content: str,
     site: dict,
+    family_active: str | None = None,
 ) -> str:
     full_title = site["full_name"]
     page_title = full_title if title == full_title else f"{title} | {site['name']}"
@@ -129,7 +133,7 @@ def layout(
       </nav>
     </div>
   </header>
-  {family_strip(site)}
+  {family_strip(site, output_path, family_active)}
   <main id="main">{content}</main>
   <footer class="site-footer">
     <div>
@@ -256,7 +260,7 @@ def research_page(data: dict) -> tuple[str, str, str, str]:
 
 def about_page(data: dict) -> tuple[str, str, str, str]:
     site = data["site"]
-    classes_url = next(item["url"] for item in site["family_links"] if item["label"] == "Classes")
+    aa_ss_url = next(item["url"] for item in site["family_links"] if item["key"] == "aa_ss_2026_2027")
     output = "about/index.html"
     content = f"""
 <div class="page-shell article-shell">
@@ -277,7 +281,7 @@ def about_page(data: dict) -> tuple[str, str, str, str]:
     <p class="eyebrow">For prospective students</p>
     <h2 id="prospective-title">Preparing for senior research</h2>
     <p>Junior students interested in senior research in Astro Lab are encouraged to build their astronomy background through TJ's Advanced Astronomy electives. The electives support later research work with shared scientific context, quantitative methods, and astronomical problem solving.</p>
-    <p class="quiet-link"><a href="{esc(classes_url)}">View the current Classes site</a></p>
+    <p class="quiet-link"><a href="{esc(aa_ss_url)}">View the current AA:SS class</a></p>
   </section>
   <section class="content-section split-section" aria-labelledby="modes-title">
     <div>
@@ -300,6 +304,58 @@ def about_page(data: dict) -> tuple[str, str, str, str]:
   </section>
 </div>"""
     return output, "About the Lab", "How students conduct astronomy and astrophysics research at TJHSST.", content
+
+
+def astronomy_research_class_page(data: dict) -> tuple[str, str, str, str]:
+    course = data["astronomy_research_class"]
+    output = course["path"]
+    quick_links = "\n".join(
+        f'''<a class="class-quick-link" href="{esc(item.get('url') or href(output, item['path']))}">
+  <span>{esc(item['label'])}</span><small>{esc(item['detail'])}</small>
+</a>'''
+        for item in course["quick_links"]
+    )
+    literature_tools = "\n".join(
+        f'''<article class="class-resource-card">
+  <h3><a href="{esc(item['url'])}">{esc(item['label'])}</a></h3>
+  <p>{esc(item['description'])}</p>
+</article>'''
+        for item in course["literature_tools"]
+    )
+    journal_entries = "\n".join(
+        f'''<article class="journal-card">
+  <p class="class-card-status">{esc(item['status'])}</p>
+  <h3><a href="{esc(item['url'])}">{esc(item['title'])}</a></h3>
+  <p class="journal-citation">{esc(item['authors'])} · {esc(item['publication'])}</p>
+  <p>{esc(item['description'])}</p>
+</article>'''
+        for item in course["journal_club"]
+    )
+    content = f"""
+<div class="page-shell article-shell class-page-shell">
+  <header class="page-heading class-page-heading">
+    <p class="eyebrow">Astronomy Research · {esc(course['school_year'])}</p>
+    <h1>Astronomy Research</h1>
+    <p class="lede">{esc(course['summary'])}</p>
+    <nav class="class-quick-links" aria-label="Current class links">{quick_links}</nav>
+  </header>
+  <section class="class-section" aria-labelledby="journal-club-title">
+    <div class="class-section-heading">
+      <p class="eyebrow">Reading together</p>
+      <h2 id="journal-club-title">Journal club</h2>
+    </div>
+    <div class="journal-grid">{journal_entries}</div>
+  </section>
+  <section class="class-section" aria-labelledby="literature-tools-title">
+    <div class="class-section-heading">
+      <p class="eyebrow">Finding research</p>
+      <h2 id="literature-tools-title">Literature tools</h2>
+      <p>Use these sources to locate recent work and follow references through the astronomy literature.</p>
+    </div>
+    <div class="class-resource-grid">{literature_tools}</div>
+  </section>
+</div>"""
+    return output, f"Astronomy Research {course['short_year']}", "Current links, journal-club readings, and literature resources for TJHSST Astronomy Research.", content
 
 
 def contact_page(data: dict) -> tuple[str, str, str, str]:
@@ -524,17 +580,18 @@ def project_page(data: dict, project: dict) -> tuple[str, str, str, str]:
 def render_all(data: dict) -> dict[str, str]:
     site = data["site"]
     specifications = [
-        (*home_page(data), "home"),
-        (*research_page(data), "research"),
-        (*about_page(data), "about"),
-        (*partners_page(data), "partners"),
-        (*labs_page(data), "labs"),
-        (*contact_page(data), "contact"),
+        (*home_page(data), "home", None),
+        (*research_page(data), "research", None),
+        (*about_page(data), "about", None),
+        (*partners_page(data), "partners", None),
+        (*labs_page(data), "labs", None),
+        (*contact_page(data), "contact", None),
+        (*astronomy_research_class_page(data), "", "astronomy_research_2026_2027"),
     ]
-    specifications.extend((*year_page(data, year), "research") for year in data["years"])
-    specifications.extend((*project_page(data, project), "research") for project in data["projects"])
+    specifications.extend((*year_page(data, year), "research", None) for year in data["years"])
+    specifications.extend((*project_page(data, project), "research", None) for project in data["projects"])
     rendered: dict[str, str] = {}
-    for output_path, title, description, content, active in specifications:
+    for output_path, title, description, content, active, family_active in specifications:
         rendered[output_path] = layout(
             output_path=output_path,
             title=title,
@@ -542,6 +599,7 @@ def render_all(data: dict) -> dict[str, str]:
             active=active,
             content=content,
             site=site,
+            family_active=family_active,
         )
     return rendered
 

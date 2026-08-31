@@ -146,6 +146,20 @@ def main() -> int:
                     errors.append(f"{relative}: missing fragment #{fragment} in {target.relative_to(ROOT)}")
 
     data = json.loads((ROOT / "data" / "site.json").read_text(encoding="utf-8"))
+    family_links = data["site"]["family_links"]
+    family_keys = [item.get("key") for item in family_links]
+    if any(not key for key in family_keys) or len(family_keys) != len(set(family_keys)):
+        errors.append("data/site.json: Astro at TJ family-link keys must be present and unique")
+    if sum(bool(item.get("current")) for item in family_links) != 1:
+        errors.append("data/site.json: expected exactly one default current Astro at TJ family link")
+
+    research_class = data.get("astronomy_research_class", {})
+    if not all(research_class.get(key) for key in ("school_year", "short_year", "path", "summary")):
+        errors.append("data/site.json: Astronomy Research class metadata is incomplete")
+    for collection in ("quick_links", "literature_tools", "journal_club"):
+        if not research_class.get(collection):
+            errors.append(f"data/site.json: Astronomy Research {collection} must not be empty")
+
     year_slugs = [year["slug"] for year in data["years"]]
     if len(year_slugs) != len(set(year_slugs)):
         errors.append("data/site.json: research year slugs are not unique")
