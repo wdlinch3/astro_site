@@ -19,8 +19,8 @@
       {"label": "Contact", "path": "contact/index.html", "key": "contact"}
     ],
     "family_links": [
-      {"key": "aa_ss_2026_2027", "label": "AA:SS 2026–27", "url": "https://astro2627.sites.tjhsst.edu/ss/2026-2027/"},
-      {"key": "astronomy_research_2026_2027", "label": "Research class 2026–27", "path": "classes/astronomy-research/2026-2027/index.html"},
+      {"key": "aa_ss_2026_2027", "label": "Elective Class", "url": "https://astro2627.sites.tjhsst.edu/ss/2026-2027/"},
+      {"key": "astronomy_research_2026_2027", "label": "Research Class", "path": "classes/astronomy-research/2026-2027/index.html"},
       {"key": "research_lab", "label": "Research Lab", "path": "index.html", "current": true},
       {"key": "astro_club", "label": "Astro Club", "url": "https://activities.tjhsst.edu/astronomyclub/"},
       {"key": "astro_team", "label": "Astro Team", "url": "https://activities.tjhsst.edu/astroteam/"}

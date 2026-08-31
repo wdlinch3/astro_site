@@ -41,15 +41,15 @@ def main() -> int:
     assert '<a class="site-mark-kicker" href="https://tjhsst.fcps.edu/">TJHSST</a>' in rendered["index.html"]
     assert '<a href="https://activities.tjhsst.edu/astroteam/">Astro Team</a>' in rendered["index.html"]
     assert "Astro at TJ" in rendered["index.html"]
-    assert ">AA:SS 2026–27</a>" in rendered["index.html"]
-    assert ">Research class 2026–27</a>" in rendered["index.html"]
+    assert ">Elective Class</a>" in rendered["index.html"]
+    assert ">Research Class</a>" in rendered["index.html"]
     class_path = "classes/astronomy-research/2026-2027/index.html"
     assert class_path in rendered
     assert "<h1>Astronomy Research</h1>" in rendered[class_path]
     assert "A gas-enshrouded and gas-reddened black hole at cosmic dawn" in rendered[class_path]
     assert "NASA ADS" in rendered[class_path]
     assert "arXiv astrophysics" in rendered[class_path]
-    assert '<span class="family-current" aria-current="page">Research class 2026–27</span>' in rendered[class_path]
+    assert '<span class="family-current" aria-current="page">Research Class</span>' in rendered[class_path]
     assert '<span class="family-current" aria-current="page">Research Lab</span>' not in rendered[class_path]
     assert 'href="../../../index.html"' in rendered[class_path]
     assert "View the current AA:SS class" in rendered["about/index.html"]
