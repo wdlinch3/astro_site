@@ -83,6 +83,11 @@ does not establish whether Director's `public` directory was updated with
   public repository. The present repository contains public material only.
 - Record external collaboration explicitly so the student-credit rule can be
   applied deliberately rather than reconstructed later.
+- For student-suggested literature, begin with a restricted Google Form and a
+  private response sheet. Publish only teacher-approved fields; do not expose
+  submitter identity, raw responses, or an unmoderated feed on the public site.
+- Automate an approved-only export only after the manual moderation fields and
+  public/private boundary have been tested in normal class use.
 
 ### Peer TJ labs
 
@@ -110,9 +115,12 @@ does not establish whether Director's `public` directory was updated with
 
 - The Astro Team link points to its live Director site at
   <https://activities.tjhsst.edu/astroteam/>.
-- The Classes link currently points to the 2026-27 sister site. Keep the class
-  migration and any AA@TJ redesign in their own repository/workflow; do not mix
-  their CSS or generated pages into this lab repository.
+- The family strip links directly to the current AA:SS 2026-27 sister page and
+  the lab-owned Astronomy Research 2026-27 page. A Classes landing page remains
+  optional and is not required for these stable year-specific routes.
+- Keep AA:SS content, CSS, and generated pages in their existing source and
+  deployment repositories. The Astronomy Research class page uses this lab
+  repository's data, generator, and shared theme.
 - Revisit the Club and family links periodically so a functioning top-level
   connection does not become a stale directory.
 

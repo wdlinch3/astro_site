@@ -19,10 +19,11 @@
       {"label": "Contact", "path": "contact/index.html", "key": "contact"}
     ],
     "family_links": [
-      {"label": "Classes", "url": "https://astro2627.sites.tjhsst.edu/ss/2026-2027/"},
-      {"label": "Research Lab", "current": true},
-      {"label": "Astro Club", "url": "https://activities.tjhsst.edu/astronomyclub/"},
-      {"label": "Astro Team", "url": "https://activities.tjhsst.edu/astroteam/"}
+      {"key": "aa_ss_2026_2027", "label": "Elective Class", "url": "https://astro2627.sites.tjhsst.edu/ss/2026-2027/"},
+      {"key": "astronomy_research_2026_2027", "label": "Research Class", "path": "classes/astronomy-research/2026-2027/index.html"},
+      {"key": "research_lab", "label": "Research Lab", "path": "index.html", "current": true},
+      {"key": "astro_club", "label": "Astro Club", "url": "https://activities.tjhsst.edu/astronomyclub/"},
+      {"key": "astro_team", "label": "Astro Team", "url": "https://activities.tjhsst.edu/astroteam/"}
     ],
     "director_profiles": [
       {"label": "Personal website", "detail": "wdlinch3.github.io", "url": "https://wdlinch3.github.io/"},
@@ -37,6 +38,46 @@
     "name": "Research Practicum Program",
     "url": "https://tjhsst.fcps.edu/academics/researchpracticumprogram",
     "description": "An off-site alternative to an in-school senior research lab, connecting students with professional research settings while preserving TJ's senior research goals and project requirements."
+  },
+  "astronomy_research_class": {
+    "school_year": "2026–2027",
+    "short_year": "2026–27",
+    "path": "classes/astronomy-research/2026-2027/index.html",
+    "summary": "A yearlong class in which students develop and carry out astronomy or astrophysics research in small teams, participate in journal club, and communicate their work.",
+    "quick_links": [
+      {
+        "label": "Schoology",
+        "url": "https://lms.fcps.edu/course/8496409907/materials",
+        "detail": "Course materials, assignments, and working documents"
+      },
+      {
+        "label": "Astro Lab",
+        "path": "index.html",
+        "detail": "Public lab information and research archive"
+      }
+    ],
+    "literature_tools": [
+      {
+        "label": "NASA ADS",
+        "url": "https://ui.adsabs.harvard.edu/",
+        "description": "Search astronomy and astrophysics papers, citations, and bibliographic records."
+      },
+      {
+        "label": "arXiv astrophysics",
+        "url": "https://arxiv.org/list/astro-ph/recent",
+        "description": "Browse recent preprints across the astrophysics subject areas."
+      }
+    ],
+    "journal_club": [
+      {
+        "status": "Current reading",
+        "title": "A gas-enshrouded and gas-reddened black hole at cosmic dawn",
+        "authors": "Rohan P. Naidu et al.",
+        "publication": "Nature 656, 329–333 (2026)",
+        "url": "https://www.nature.com/articles/s41586-026-10846-4",
+        "description": "An observational and modeling study of a compact source seen 660 million years after the Big Bang."
+      }
+    ]
   },
   "partners": [
     {"name": "U.S. Naval Research Laboratory", "short": "NRL", "kind": "Federal research laboratory", "url": "https://www.nrl.navy.mil/"},
