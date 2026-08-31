@@ -108,7 +108,8 @@ does not establish whether Director's `public` directory was updated with
 
 ### Astro at TJ family
 
-- Replace the Astro Team placeholder when its officer supplies the current URL.
+- The Astro Team link points to its live Director site at
+  <https://activities.tjhsst.edu/astroteam/>.
 - The Classes link currently points to the 2026-27 sister site. Keep the class
   migration and any AA@TJ redesign in their own repository/workflow; do not mix
   their CSS or generated pages into this lab repository.
