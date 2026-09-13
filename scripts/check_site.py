@@ -166,6 +166,14 @@ def main() -> int:
     if data["site"]["latest_year"] not in year_slugs:
         errors.append("data/site.json: latest_year is not a declared research year")
     slugs: list[str] = []
+    for item in data.get("featured_research", []):
+        if not all(item.get(key) for key in ("title", "topic", "context", "summary", "result", "artifacts")):
+            errors.append("data/site.json: incomplete featured research card")
+        if item.get("credits"):
+            errors.append("data/site.json: featured cards must not contain project credits")
+        for artifact in item.get("artifacts", []):
+            if not (ROOT / artifact["path"]).is_file():
+                errors.append(f"data/site.json: missing featured artifact {artifact['path']}")
     for project in data["projects"]:
         slugs.append(project["slug"])
         if project.get("year") not in year_slugs:

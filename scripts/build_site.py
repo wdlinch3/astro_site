@@ -236,11 +236,26 @@ def research_page(data: dict) -> tuple[str, str, str, str]:
         for year in earlier_years
     )
     earlier_archives = f'<div class="year-list" aria-label="Earlier research years">{archive_links}</div>' if archive_links else ""
+    featured_cards = "\n".join(
+        f'''<article class="project-card">
+  <p class="project-topic">{esc(item['topic'])}</p>
+  <h3>{esc(item['title'])}</h3>
+  <p>{esc(item['context'])}</p>
+  <p>{esc(item['summary'])}</p>
+  <p>{esc(item['result'])}</p>
+  <div class="artifact-list">{''.join(artifact_link(artifact, output) for artifact in item['artifacts'])}</div>
+</article>'''
+        for item in data.get("featured_research", [])
+    )
+    featured_section = f'''<section class="home-section" aria-labelledby="featured-research-title">
+    <div class="section-heading"><h2 id="featured-research-title">Featured research</h2></div>
+    <div class="class-resource-grid">{featured_cards}</div>
+  </section>''' if featured_cards else ""
     content = f"""
 <div class="page-shell">
   <header class="page-heading">
     <h1>Research archive</h1>
-    <p class="lede">Browse project records by year. Each record summarizes the question, method, and result and links to retained papers and posters.</p>
+    <p class="lede">Browse senior-research records by year and other work featured by the lab, with links to retained papers and posters.</p>
   </header>
   <div class="research-index-grid">
     <section class="year-feature" aria-labelledby="year-title">
@@ -254,8 +269,9 @@ def research_page(data: dict) -> tuple[str, str, str, str]:
       {countdown(site)}
     </aside>
   </div>
+  {featured_section}
 </div>"""
-    return output, "Research", "Browse annual research records from the TJHSST Astronomy & Astrophysics Research Lab.", content
+    return output, "Research", "Browse annual research records and featured work from the TJHSST Astronomy & Astrophysics Research Lab.", content
 
 
 def about_page(data: dict) -> tuple[str, str, str, str]:
@@ -306,6 +322,38 @@ def about_page(data: dict) -> tuple[str, str, str, str]:
     return output, "About the Lab", "How students conduct astronomy and astrophysics research at TJHSST.", content
 
 
+def journal_cards(items: list[dict]) -> str:
+    cards = []
+    for item in items:
+        citation = " · ".join(item[key] for key in ("authors", "publication") if item.get(key))
+        citation_html = f'<p class="journal-citation">{esc(citation)}</p>' if citation else ""
+        description = f'<p>{esc(item["description"])}</p>' if item.get("description") else ""
+        cards.append(f'''<article class="journal-card">
+  <p class="class-card-status">{esc(item['status'])}</p>
+  <h3><a href="{esc(item['url'])}">{esc(item['title'])}</a></h3>
+{citation_html}{description}
+</article>''')
+    return "\n".join(cards)
+
+
+def journal_archive_page(data: dict) -> tuple[str, str, str, str]:
+    course = data["astronomy_research_class"]
+    output = str(Path(course["path"]).parent / "journal-club/index.html")
+    content = f'''
+<div class="page-shell article-shell class-page-shell">
+  <header class="page-heading">
+    <p class="eyebrow">Astronomy Research · {esc(course['school_year'])}</p>
+    <h1>Past journal-club articles</h1>
+    <p><a href="{esc(href(output, course['path']))}">Back to the research class</a></p>
+  </header>
+  <section aria-labelledby="past-readings-title">
+    <h2 id="past-readings-title">Previous readings</h2>
+    <div class="journal-grid">{journal_cards(course.get('journal_club_archive', []))}</div>
+  </section>
+</div>'''
+    return output, "Past journal-club articles", "Previous Astronomy Research journal-club readings.", content
+
+
 def astronomy_research_class_page(data: dict) -> tuple[str, str, str, str]:
     course = data["astronomy_research_class"]
     output = course["path"]
@@ -322,15 +370,7 @@ def astronomy_research_class_page(data: dict) -> tuple[str, str, str, str]:
 </article>'''
         for item in course["literature_tools"]
     )
-    journal_entries = "\n".join(
-        f'''<article class="journal-card">
-  <p class="class-card-status">{esc(item['status'])}</p>
-  <h3><a href="{esc(item['url'])}">{esc(item['title'])}</a></h3>
-  <p class="journal-citation">{esc(item['authors'])} · {esc(item['publication'])}</p>
-  <p>{esc(item['description'])}</p>
-</article>'''
-        for item in course["journal_club"]
-    )
+    journal_entries = journal_cards(course["journal_club"])
     content = f"""
 <div class="page-shell article-shell class-page-shell">
   <header class="page-heading class-page-heading">
@@ -345,6 +385,7 @@ def astronomy_research_class_page(data: dict) -> tuple[str, str, str, str]:
       <h2 id="journal-club-title">Journal club</h2>
     </div>
     <div class="journal-grid">{journal_entries}</div>
+    <p class="quiet-link"><a href="journal-club/index.html">Past journal-club articles</a></p>
   </section>
   <section class="class-section" aria-labelledby="literature-tools-title">
     <div class="class-section-heading">
@@ -587,6 +628,7 @@ def render_all(data: dict) -> dict[str, str]:
         (*labs_page(data), "labs", None),
         (*contact_page(data), "contact", None),
         (*astronomy_research_class_page(data), "", "astronomy_research_2026_2027"),
+        (*journal_archive_page(data), "", "astronomy_research_2026_2027"),
     ]
     specifications.extend((*year_page(data, year), "research", None) for year in data["years"])
     specifications.extend((*project_page(data, project), "research", None) for project in data["projects"])

@@ -46,7 +46,17 @@ def main() -> int:
     class_path = "classes/astronomy-research/2026-2027/index.html"
     assert class_path in rendered
     assert "<h1>Astronomy Research</h1>" in rendered[class_path]
-    assert "A gas-enshrouded and gas-reddened black hole at cosmic dawn" in rendered[class_path]
+    archive_path = "classes/astronomy-research/2026-2027/journal-club/index.html"
+    past_title = "A gas-enshrouded and gas-reddened black hole at cosmic dawn"
+    assert past_title not in rendered[class_path]
+    assert past_title in rendered[archive_path]
+    assert 'href="journal-club/index.html"' in rendered[class_path]
+    assert "1YcyYk6gVUqBkF9YF0_uPVQqrT2nN-WpI483ASUhTh-U" in rendered[class_path]
+    assert 'href="https://lms.fcps.edu/course/8496409907/materials"' in rendered[class_path]
+    assert "Coronal magnetic field modeling" in rendered["research/index.html"]
+    assert "Coronal magnetic field modeling" not in rendered["2025-26/index.html"]
+    assert "outside the senior-research program" in rendered["research/index.html"]
+    assert 'href="featured/coronal_field_modeling_redacted.pdf"' in rendered["research/index.html"]
     assert "NASA ADS" in rendered[class_path]
     assert "arXiv astrophysics" in rendered[class_path]
     assert '<span class="family-current" aria-current="page">Research Class</span>' in rendered[class_path]
