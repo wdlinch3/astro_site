@@ -147,3 +147,30 @@ does not establish whether Director's `public` directory was updated with
 Extend the site from evidence and actual recurring needs. Preserve the compact,
 matter-of-fact tone: show what the lab is doing, make the useful paths obvious,
 and invite contact without promotional language.
+
+## Locally prepared updates — 2026-09-13
+
+Branch `codex/class-links-featured-research` adds a past-reading archive for
+journal club and a separate Featured research card for coronal magnetic field
+modeling. The card is outside the annual senior-research collections. Its
+results are attributed to the supplied paper; flare-forecasting accuracy was
+not evaluated in that paper. The supplied redacted PDF is copied unchanged:
+SHA-256 `be1d54691264b6c56bf7458401321d88ba6545370f0ff86b7566eb0b23fa51db`.
+
+The new Google Docs URL is the exact user-supplied URL. The Drive connector
+returned 404, so its title and student access remain unverified; the visible
+label is “Current journal-club document.” No sharing permissions were changed.
+The research-class Schoology URL already matched the requested course.
+
+Content maintenance: edit `astronomy_research_class.journal_club`,
+`astronomy_research_class.journal_club_archive`, and `featured_research` in
+`data/site.json`, then regenerate and run the required checks. AA:SS class
+links belong in `../wdlinch3.github.io/_data/aa_courses.yml`; the Schoology
+addition is prepared on `codex/aa-schoology-link` in that source repository.
+`../astro2627` remains generated delivery output and has not been rebuilt.
+
+Validation: all required Astro Lab checks passed; the AA source Jekyll build
+passed using `~/.rubies/ruby-3.3.4/bin/bundle`. Local HTTP review verified the
+archive navigation and AA Schoology destination. Research archive widths were
+confirmed at 1280, 768, 390, and 320 CSS pixels without page overflow.
+These changes have not been pushed, merged, or deployed to Director.

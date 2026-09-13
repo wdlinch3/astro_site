@@ -71,6 +71,13 @@
     "journal_club": [
       {
         "status": "Current reading",
+        "title": "Current journal-club document",
+        "url": "https://docs.google.com/document/d/1YcyYk6gVUqBkF9YF0_uPVQqrT2nN-WpI483ASUhTh-U/edit?tab=t.0"
+      }
+    ],
+    "journal_club_archive": [
+      {
+        "status": "Past reading",
         "title": "A gas-enshrouded and gas-reddened black hole at cosmic dawn",
         "authors": "Rohan P. Naidu et al.",
         "publication": "Nature 656, 329–333 (2026)",
@@ -79,6 +86,21 @@
       }
     ]
   },
+  "featured_research": [
+    {
+      "title": "Coronal magnetic field modeling",
+      "topic": "Solar physics",
+      "context": "Independent research featured by Astro Lab; outside the senior-research program.",
+      "summary": "A physics-informed tensorized Fourier neural operator reconstructs coronal magnetic fields from a single boundary layer, with potential applications to solar-flare forecasting.",
+      "result": "The paper reports R² = 0.820 and mean relative error 0.326 on simulated fields, with predictions within two seconds. It demonstrates field reconstruction, but does not evaluate flare-forecasting accuracy.",
+      "artifacts": [
+        {
+          "label": "Paper",
+          "path": "research/featured/coronal_field_modeling_redacted.pdf"
+        }
+      ]
+    }
+  ],
   "partners": [
     {"name": "U.S. Naval Research Laboratory", "short": "NRL", "kind": "Federal research laboratory", "url": "https://www.nrl.navy.mil/"},
     {"name": "Johns Hopkins University Applied Physics Laboratory", "short": "APL", "kind": "University-affiliated research center", "url": "https://www.jhuapl.edu/"},
