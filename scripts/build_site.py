@@ -618,6 +618,16 @@ def project_page(data: dict, project: dict) -> tuple[str, str, str, str]:
     return output, project["title"], project["summary"], content
 
 
+
+def minicourse_pages(data: dict):
+    output = "minicourses/index.html"
+    cards = []
+    for course in data["minicourses"]:
+        cards.append(f"""<section class="class-resource-card" id="{esc(course['id'])}">
+<h2>{esc(course['title'])}</h2><p>{esc(course['description'])}</p>
+<p><a href="{esc(href(output, course['reading']))}">Read online</a> · <a href="{esc(href(output, course['pdf']))}">PDF</a></p></section>""")
+    yield output, "Minicourses", "Guided studies in mathematics and physics.", '<div class="page-shell"><header class="page-heading"><h1>Minicourses</h1><p>Guided studies in mathematics and physics.</p></header><div class="class-resource-grid">' + ''.join(cards) + '</div></div>'
+
 def render_all(data: dict) -> dict[str, str]:
     site = data["site"]
     specifications = [
@@ -632,6 +642,7 @@ def render_all(data: dict) -> dict[str, str]:
     ]
     specifications.extend((*year_page(data, year), "research", None) for year in data["years"])
     specifications.extend((*project_page(data, project), "research", None) for project in data["projects"])
+    specifications.extend((*page, "minicourses", None) for page in minicourse_pages(data))
     rendered: dict[str, str] = {}
     for output_path, title, description, content, active, family_active in specifications:
         rendered[output_path] = layout(

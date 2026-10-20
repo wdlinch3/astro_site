@@ -38,3 +38,11 @@ Project credits are public only when a project records `external_collaboration: 
 4. Verify the TJ-hosted URL anonymously after the pull.
 
 GitHub is the source repository. The TJHSST Director site is the public delivery path.
+
+### Minicourses
+
+The catalog is generated from `data/site.json`. All eight Read online and PDF
+links use the school-hosted student editions at `astro2627.sites.tjhsst.edu`.
+Their build and packet styling are managed by the `astro2627` deployment builder,
+using the exact recorded personal-site source commit. The earlier local reader
+experiment is retained outside this deployment in the survey record.
