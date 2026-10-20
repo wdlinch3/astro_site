@@ -1,4 +1,62 @@
 {
+  "minicourses": [
+    {
+      "id": "groups",
+      "title": "Groups",
+      "description": "A mechanics-oriented introduction to rotations, vectors, covectors, index notation, and the matrix language behind rotation groups. Starts from 3D linear algebra and rotations, then moves toward SO(2), SO(3), SO(n), and standard matrix groups.",
+      "reading": "https://astro2627.sites.tjhsst.edu/teaching/minicourses/materials/groups/groups.html",
+      "pdf": "https://astro2627.sites.tjhsst.edu/teaching/minicourses/materials/groups/Groups.pdf"
+    },
+    {
+      "id": "linear_algebra",
+      "title": "Sturm–Liouville",
+      "description": "A Research Club packet connecting finite-dimensional linear algebra to function spaces and analysis. Covers eigenvectors, adjoints, self-adjoint operators, Gram-Schmidt, orthogonal polynomials, Fourier series, and Sturm-Liouville problems.",
+      "reading": "https://astro2627.sites.tjhsst.edu/teaching/minicourses/materials/linear_algebra/sturm_liouville.html",
+      "pdf": "https://astro2627.sites.tjhsst.edu/teaching/minicourses/materials/linear_algebra/sturm_liouville.pdf"
+    },
+    {
+      "id": "time_translations",
+      "title": "Time Translations",
+      "description": "A packet on time evolution by analogy with spatial translations. Identifies energy as the generator of time translations, derives Hamilton's equations, introduces Poisson brackets, and points toward Hamiltonian quantization.",
+      "reading": "https://astro2627.sites.tjhsst.edu/teaching/minicourses/materials/time_translations/time_translations.html",
+      "pdf": "https://astro2627.sites.tjhsst.edu/teaching/minicourses/materials/time_translations/time_translations.pdf"
+    },
+    {
+      "id": "qm_to_em",
+      "title": "Quantum Mechanics to Electromagnetism",
+      "description": "A derivation of electromagnetism from local quantum phase changes. Develops gauge covariance, vector potentials, the Aharonov-Bohm effect, differential forms, current, metric structure, Hodge duals, and Maxwell's equations.",
+      "reading": "https://astro2627.sites.tjhsst.edu/teaching/minicourses/materials/qm_to_em/qm_to_em.html",
+      "pdf": "https://astro2627.sites.tjhsst.edu/teaching/minicourses/materials/qm_to_em/qm_to_em.pdf"
+    },
+    {
+      "id": "gauge_theory_1",
+      "title": "Gauge Theory I",
+      "description": "A guided derivation packet on gauge fields from local quantum phase. Develops covariant derivatives, connections, curvature, field strength, holonomy, abelian and nonabelian gauge transformations, and gauge-invariant dynamics.",
+      "reading": "https://astro2627.sites.tjhsst.edu/teaching/minicourses/materials/gauge_theory_1/gauge_theory_1.html",
+      "pdf": "https://astro2627.sites.tjhsst.edu/teaching/minicourses/materials/gauge_theory_1/gauge_theory_1.pdf"
+    },
+    {
+      "id": "em_forms",
+      "title": "Electromagnetism in Differential Forms",
+      "description": "A compact rewriting of Maxwell theory using differential forms. Moves from integral and vector-calculus formulations to the Faraday tensor, compact Maxwell equations, gauge invariance, and the Maxwell action.",
+      "reading": "https://astro2627.sites.tjhsst.edu/teaching/minicourses/materials/relativity/em_forms/em_forms.html",
+      "pdf": "https://astro2627.sites.tjhsst.edu/teaching/minicourses/materials/relativity/em_forms/em_forms.pdf"
+    },
+    {
+      "id": "general_relativity",
+      "title": "General Relativity",
+      "description": "A polished Quarto packet on the geometric structures behind general relativity. Moves from action-at-a-distance concerns to metrics as dynamical fields, spacetime geometry, and coordinate-independent formulation.",
+      "reading": "https://astro2627.sites.tjhsst.edu/teaching/minicourses/materials/relativity/gr/general_relativity.html",
+      "pdf": "https://astro2627.sites.tjhsst.edu/teaching/minicourses/materials/relativity/gr/general_relativity.pdf"
+    },
+    {
+      "id": "renormalization_packet",
+      "title": "Renormalization",
+      "description": "A guided problem packet on renormalization in a solvable quantum-mechanical model: a particle in two dimensions with an attractive delta-function potential. Leads through Green functions, logarithmic divergences, running coupling, beta functions, dimensional transmutation, asymptotic freedom, and the scale anomaly.",
+      "reading": "https://astro2627.sites.tjhsst.edu/teaching/minicourses/materials/renormalization_packet/renormalization_without_qft_student_v3.html",
+      "pdf": "https://astro2627.sites.tjhsst.edu/teaching/minicourses/materials/renormalization_packet/renormalization_without_qft_student_v3.pdf"
+    }
+  ],
   "site": {
     "name": "TJHSST Astronomy & Astrophysics",
     "full_name": "Laboratory for Astronomy & Astrophysics Research",
@@ -13,6 +71,7 @@
     "primary_nav": [
       {"label": "Home", "path": "index.html", "key": "home"},
       {"label": "Research", "path": "research/index.html", "key": "research"},
+      {"label": "Minicourses", "path": "minicourses/index.html", "key": "minicourses"},
       {"label": "About", "path": "about/index.html", "key": "about"},
       {"label": "Partners", "path": "partners/index.html", "key": "partners"},
       {"label": "TJ Labs", "path": "labs/index.html", "key": "labs"},
@@ -45,6 +104,7 @@
     "path": "classes/astronomy-research/2026-2027/index.html",
     "summary": "A yearlong class in which students develop and carry out astronomy or astrophysics research in small teams, participate in journal club, and communicate their work.",
     "quick_links": [
+      {"label": "Minicourses", "path": "minicourses/index.html", "detail": "Guided studies in mathematics and physics"},
       {
         "label": "Schoology",
         "url": "https://lms.fcps.edu/course/8496409907/materials",
