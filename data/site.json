@@ -1,4 +1,29 @@
 {
+  "about_lab": {
+    "summary": "Students develop a research question from the literature, carry out a group project, and present their work at tjSTAR.",
+    "process_sections": [
+      {
+        "id": "reading-discussion",
+        "title": "Reading and discussion",
+        "text": "Class generally begins with astronomy news of the day and discussion of recent papers, or with journal club, where students review the papers they have been reading. These conversations help students become familiar with the research literature."
+      },
+      {
+        "id": "project-proposal",
+        "title": "From literature to a proposal",
+        "text": "Once students are sufficiently familiar with the literature, they form groups and brainstorm project ideas. Each group writes a formal research proposal in LaTeX. After the proposal is approved, students continue researching their topic and carrying out the project."
+      },
+      {
+        "id": "research-journal",
+        "title": "A daily research record",
+        "text": "Throughout the year, each student keeps a daily journal of the work they are doing and the papers they are reading. The journal provides a continuing record of their research."
+      },
+      {
+        "id": "presenting-research",
+        "title": "Presenting the work at tjSTAR",
+        "text": "The year culminates in tjSTAR. Students prepare a portfolio that includes a research paper and a poster. They defend their work in a poster session and give a talk."
+      }
+    ]
+  },
   "minicourses": [
     {
       "id": "groups",

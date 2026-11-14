@@ -276,28 +276,31 @@ def research_page(data: dict) -> tuple[str, str, str, str]:
 
 def about_page(data: dict) -> tuple[str, str, str, str]:
     site = data["site"]
+    about = data["about_lab"]
     aa_ss_url = next(item["url"] for item in site["family_links"] if item["key"] == "aa_ss_2026_2027")
     output = "about/index.html"
+    process_sections = "\n".join(
+        f'''<section class="content-section"{(' id="practice-title"' if section['id'] == 'reading-discussion' else '')} aria-labelledby="{esc(section['id'])}">
+    <h2 id="{esc(section['id'])}">{esc(section['title'])}</h2>
+    <p>{esc(section['text'])}</p>
+  </section>'''
+        for section in about["process_sections"]
+    )
     content = f"""
 <div class="page-shell article-shell">
   <header class="page-heading">
     <p class="eyebrow">About the lab</p>
     <h1>Senior research in Astro Lab</h1>
-    <p class="lede">Students complete a year-long astronomy or astrophysics research project and present the resulting work.</p>
+    <p class="lede">{esc(about['summary'])}</p>
+    <p class="quiet-link"><a href="{esc(href(output, data['astronomy_research_class']['path']))}">Current Research Class links and journal club</a></p>
   </header>
-  <section class="content-section" aria-labelledby="practice-title">
-    <h2 id="practice-title">Research process</h2>
-    <div class="practice-grid">
-      <article><h3>Develop</h3><p>Read technical literature, identify a tractable question, and design a research plan with appropriate evidence.</p></article>
-      <article><h3>Investigate</h3><p>Use observations, archives, computation, simulation, or instrumentation while recording choices and uncertainty.</p></article>
-      <article><h3>Communicate</h3><p>Explain methods and conclusions through research writing, posters, talks, and critique from a scientific audience.</p></article>
-    </div>
-  </section>
+  {process_sections}
   <section class="content-section prospective-section" aria-labelledby="prospective-title">
     <p class="eyebrow">For prospective students</p>
     <h2 id="prospective-title">Preparing for senior research</h2>
     <p>Junior students interested in senior research in Astro Lab are encouraged to build their astronomy background through TJ's Advanced Astronomy electives. The electives support later research work with shared scientific context, quantitative methods, and astronomical problem solving.</p>
     <p class="quiet-link"><a href="{esc(aa_ss_url)}">View the current AA:SS class</a></p>
+    <p class="quiet-link"><a href="{esc(href(output, 'minicourses/index.html'))}">Explore guided studies in mathematics and physics</a></p>
   </section>
   <section class="content-section split-section" aria-labelledby="modes-title">
     <div>
