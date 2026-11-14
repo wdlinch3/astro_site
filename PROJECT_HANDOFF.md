@@ -174,3 +174,26 @@ passed using `~/.rubies/ruby-3.3.4/bin/bundle`. Local HTTP review verified the
 archive navigation and AA Schoology destination. Research archive widths were
 confirmed at 1280, 768, 390, and 320 CSS pixels without page overflow.
 These changes have not been pushed, merged, or deployed to Director.
+
+## Preservation tooling — 2026-11-14
+
+Prepared a repeatable public-mirror exporter on `codex/lab-preservation`.
+It exports reviewed committed lab pages and their dependencies, optionally
+bundling the school deployment's explicit minicourse allowlist. It preserves
+source provenance and reports remaining external dependencies. See the
+README's Public mirror export instructions.
+
+Baseline: freshly fetched Astro Lab `origin/main` is `399c8fa`; school deployment
+`origin/main` is `58bc332`, recording personal-site content commit `ab1b817`.
+The school checkout itself was older; the exporter reads the selected Git
+revision directly. No private minicourse candidates or untracked `2024-25/`
+artifacts are included. The newer school assignment editions remain in the
+personal site's AA delivery; optional exact course-link mappings connect the
+mirror to those existing personal routes.
+
+A trial export contains 150 files, including eight minicourse readings and
+nine minicourse PDFs. Existing CDN runtime links, school services, and external
+research references remain recorded dependencies. This does not assert that
+private working sources are all pushed, that all school services are backed
+up, or that an offline edition exists. No deployment or merge is performed by
+this tool.
