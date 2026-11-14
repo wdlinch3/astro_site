@@ -1,5 +1,30 @@
 # Astro Lab site handoff
 
+## About-page update — 2026-11-14
+
+Branch `codex/lab-how-it-works` replaces the generic research-process cards
+with William's account of reading/discussion, literature-informed group
+proposals in LaTeX, daily individual research journals, and the paper/poster,
+poster defense and talk at tjSTAR. The copy lives in `data/site.json` under
+`about_lab`; the generator retains existing styling and public routes,
+including the former `#practice-title` fragment. Current class and minicourse
+links are added to About. No Research Class assignments or Partners copy change.
+Partners remain one inclusive list; recurring relationships are not divided
+into current/former categories.
+
+Authority: William's explicit description on November 14, supported by the
+current student/counselor program guides and the local 2026–27 Research syllabus.
+The referenced research VLO spreadsheet returned permission denied through the
+connected account; no claim is made that its contents were reviewed. No grading,
+admission, AI, or weekly-schedule policy was inferred from older drafting notes.
+
+All required build, structural, generation, countdown and diff checks passed.
+Independent copy/source review found no blockers. HTTP before/after review
+verified actual 1280, 768, 390 and 320 CSS-pixel widths with one h1 and no
+page-level overflow. Local preview: `http://127.0.0.1:8780/about/index.html`.
+Not merged or deployed. On release, refresh the proposed personal mirror from
+the reviewed merged lab revision and resync the personal lab catalog metadata.
+
 Last updated: 2026-08-30
 
 ## Current state
